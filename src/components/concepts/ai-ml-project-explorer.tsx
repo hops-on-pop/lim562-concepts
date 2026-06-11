@@ -113,11 +113,11 @@ const projects: GenAiProject[] = [
     id: "readers-advisory",
     categoryId: "lis-expert",
     label: "Readers' advisory",
-    shortLabel: "Read-alikes",
+    shortLabel: "recommendations",
     icon: BookHeart,
     readiness: "experimental",
     value:
-      "Suggests read-alikes and themed lists from natural-language descriptions of what a reader enjoyed.",
+      "Suggests reccomended readings and themed lists from natural-language descriptions of what a reader enjoyed.",
     scenario:
       "A patron wants “something like Project Hail Mary but more hopeful.” Staff use a prompt template to generate candidates, then curate the list against the local collection and what they know about community tastes.",
     inTheField:
