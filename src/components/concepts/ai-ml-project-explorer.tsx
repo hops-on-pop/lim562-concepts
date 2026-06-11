@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Accessibility,
@@ -17,33 +17,33 @@ import {
   Search,
   ShieldAlert,
   Tags,
-} from "lucide-react"
-import { useMemo, useState } from "react"
+} from "lucide-react";
+import { useMemo, useState } from "react";
 
-import { Badge } from "@/components/ui/badge"
-import { getConceptTheme } from "@/lib/concept-themes"
-import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge";
+import { getConceptTheme } from "@/lib/concept-themes";
+import { cn } from "@/lib/utils";
 
-import { ConceptExplorerShell } from "./concept-explorer-shell"
-import { type GenAiCategory, GenAiCategoryMap } from "./genai-category-map"
+import { ConceptExplorerShell } from "./concept-explorer-shell";
+import { type GenAiCategory, GenAiCategoryMap } from "./genai-category-map";
 
-type RiskSeverity = "high" | "medium" | "low"
+type RiskSeverity = "high" | "medium" | "low";
 
-type Readiness = "established" | "emerging" | "experimental"
+type Readiness = "established" | "emerging" | "experimental";
 
 type GenAiProject = {
-  id: string
-  categoryId: string
-  label: string
-  shortLabel: string
-  icon: typeof Search
-  readiness: Readiness
-  value: string
-  scenario: string
-  inTheField: string
-  risks: { text: string; severity: RiskSeverity }[]
-  review: string
-}
+  id: string;
+  categoryId: string;
+  label: string;
+  shortLabel: string;
+  icon: typeof Search;
+  readiness: Readiness;
+  value: string;
+  scenario: string;
+  inTheField: string;
+  risks: { text: string; severity: RiskSeverity }[];
+  review: string;
+};
 
 const projects: GenAiProject[] = [
   {
@@ -256,7 +256,7 @@ const projects: GenAiProject[] = [
     review:
       "Verify drafts against the materials, disclose AI assistance in processing notes, and keep archivist judgment final.",
   },
-]
+];
 
 const categoryMeta: Omit<GenAiCategory, "projects">[] = [
   {
@@ -287,7 +287,7 @@ const categoryMeta: Omit<GenAiCategory, "projects">[] = [
       chipIcon: "text-violet-900",
     },
   },
-]
+];
 
 const severityMeta: Record<
   RiskSeverity,
@@ -308,7 +308,7 @@ const severityMeta: Record<
     chipClassName: "border-slate-300 bg-slate-100 text-slate-800",
     swatchClassName: "bg-slate-400",
   },
-}
+};
 
 const readinessMeta: Record<
   Readiness,
@@ -332,12 +332,12 @@ const readinessMeta: Record<
     dotClassName: "bg-violet-500",
     blurb: "early prototypes the field is still debating",
   },
-}
+};
 
-const theme = getConceptTheme("ai-ml-libraries")
+const theme = getConceptTheme("ai-ml-libraries");
 
 export function AiMlProjectExplorer() {
-  const [activeId, setActiveId] = useState(projects[0].id)
+  const [activeId, setActiveId] = useState(projects[0].id);
 
   const categories = useMemo<GenAiCategory[]>(
     () =>
@@ -354,11 +354,11 @@ export function AiMlProjectExplorer() {
           })),
       })),
     [],
-  )
+  );
 
-  const project = projects.find((item) => item.id === activeId) ?? projects[0]
-  const Icon = project.icon
-  const readiness = readinessMeta[project.readiness]
+  const project = projects.find((item) => item.id === activeId) ?? projects[0];
+  const Icon = project.icon;
+  const readiness = readinessMeta[project.readiness];
 
   return (
     <ConceptExplorerShell
@@ -466,7 +466,7 @@ export function AiMlProjectExplorer() {
         </p>
       </section>
     </ConceptExplorerShell>
-  )
+  );
 }
 
 function SeverityLegend() {
@@ -485,7 +485,7 @@ function SeverityLegend() {
         </span>
       ))}
     </p>
-  )
+  );
 }
 
 function ReadinessLegend() {
@@ -505,7 +505,7 @@ function ReadinessLegend() {
         </span>
       ))}
     </p>
-  )
+  );
 }
 
 function ReviewPanel({
@@ -513,9 +513,9 @@ function ReviewPanel({
   icon,
   label,
 }: {
-  children: React.ReactNode
-  icon: React.ReactNode
-  label: string
+  children: React.ReactNode;
+  icon: React.ReactNode;
+  label: string;
 }) {
   return (
     <div className="h-full rounded-lg bg-muted/60 p-4">
@@ -525,5 +525,5 @@ function ReviewPanel({
       </Badge>
       <div className="text-sm leading-6 text-muted-foreground">{children}</div>
     </div>
-  )
+  );
 }

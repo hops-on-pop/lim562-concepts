@@ -229,7 +229,7 @@ export function AiMlLifecycleExplorer() {
             activeIndex={active}
             loopLabel="revise"
             markerId="ai-ml-cycle-arrow"
-            onSelect={goTo}
+            onSelectAction={goTo}
             palette="indigo"
             prevIndex={prevActive}
             stages={lifecycle}

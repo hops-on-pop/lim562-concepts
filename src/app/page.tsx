@@ -38,10 +38,6 @@ export default function Home() {
               >
                 Concept topics
               </h2>
-              <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                Each topic combines a short class recap with a clickable diagram
-                or comparison activity.
-              </p>
             </div>
             <Badge className="w-fit gap-1.5" variant="secondary">
               <Layers3 className="size-3.5" />
@@ -86,6 +82,16 @@ export default function Home() {
             ))}
           </div>
         </section>
+        <div>
+          To view the source code, visit the{" "}
+          <Link
+            href="https://github.com/hops-on-pop/lim562-concepts"
+            className="text-blue-500 underline hover:text-blue-800"
+          >
+            GitHub repository
+          </Link>
+          .
+        </div>
       </div>
     </main>
   )

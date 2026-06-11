@@ -167,7 +167,7 @@ export function DevLifecycleExplorer() {
           activeIndex={active}
           loopLabel="iterate"
           markerId="dev-sdlc-cycle-arrow"
-          onSelect={goTo}
+          onSelectAction={goTo}
           palette="cyan"
           prevIndex={prevActive}
           stages={stages}

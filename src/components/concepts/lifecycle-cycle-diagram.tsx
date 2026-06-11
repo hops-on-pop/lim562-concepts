@@ -59,7 +59,7 @@ type LifecycleCycleDiagramProps = {
   stages: CycleStage[];
   activeIndex: number;
   prevIndex: number;
-  onSelect: (index: number) => void;
+  onSelectAction: (index: number) => void;
   theme: ConceptTheme;
   palette?: keyof typeof palettes;
   loopLabel?: string;
@@ -142,7 +142,7 @@ export function LifecycleCycleDiagram({
   stages,
   activeIndex,
   prevIndex,
-  onSelect,
+  onSelectAction,
   theme,
   palette = "indigo",
   loopLabel = "revise",
@@ -286,7 +286,7 @@ export function LifecycleCycleDiagram({
                 isActive ? theme.activeControl : theme.inactiveControl,
               )}
               key={stage.label}
-              onClick={() => onSelect(index)}
+              onClick={() => onSelectAction(index)}
               style={{ left, top }}
               type="button"
             >
@@ -302,7 +302,7 @@ export function LifecycleCycleDiagram({
       <VerticalCycle
         activeIndex={activeIndex}
         loopLabel={loopLabel}
-        onSelect={onSelect}
+        onSelect={onSelectAction}
         stages={stages}
         theme={theme}
         verticalLoopClass={colors.verticalLoop}

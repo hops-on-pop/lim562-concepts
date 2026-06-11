@@ -62,7 +62,7 @@ type RequestJourneyDiagramProps = {
   steps: JourneyStep[];
   activeIndex: number;
   prevIndex: number;
-  onSelect: (index: number) => void;
+  onSelectAction: (index: number) => void;
   theme: ConceptTheme;
 };
 
@@ -161,7 +161,7 @@ export function RequestJourneyDiagram({
   steps,
   activeIndex,
   prevIndex,
-  onSelect,
+  onSelectAction,
   theme,
 }: RequestJourneyDiagramProps) {
   const prefersReducedMotion = useReducedMotion() ?? false;
@@ -311,7 +311,7 @@ export function RequestJourneyDiagram({
                     : theme.inactiveControl,
               )}
               key={`${step.layerId}-${step.leg}`}
-              onClick={() => onSelect(index)}
+              onClick={() => onSelectAction(index)}
               style={{
                 left: `${(x / VIEW_WIDTH) * 100}%`,
                 top: `${(y / VIEW_HEIGHT) * 100}%`,
@@ -350,7 +350,7 @@ export function RequestJourneyDiagram({
       <VerticalJourney
         activeIndex={activeIndex}
         layers={layers}
-        onSelect={onSelect}
+        onSelect={onSelectAction}
         steps={steps}
         theme={theme}
       />

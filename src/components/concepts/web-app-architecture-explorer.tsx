@@ -224,7 +224,7 @@ export function WebAppArchitectureExplorer() {
         <RequestJourneyDiagram
           activeIndex={active}
           layers={layers}
-          onSelect={goTo}
+          onSelectAction={goTo}
           prevIndex={prevActive}
           steps={journeySteps}
           theme={theme}
