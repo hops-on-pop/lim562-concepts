@@ -1,31 +1,31 @@
-"use client";
+"use client"
 
-import type { LucideIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react"
 import {
   AppWindow,
   Building2,
   CloudCog,
   Layers3,
   ShieldCheck,
-} from "lucide-react";
-import { useReducedMotion } from "motion/react";
-import { Fragment, useState } from "react";
+} from "lucide-react"
+import { useReducedMotion } from "motion/react"
+import { Fragment, useState } from "react"
 
-import { Badge } from "@/components/ui/badge";
-import { MOTION_EASE, motionTransition } from "@/lib/animation";
-import { getConceptTheme } from "@/lib/concept-themes";
-import { motion } from "@/lib/motion";
-import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge"
+import { MOTION_EASE, motionTransition } from "@/lib/animation"
+import { getConceptTheme } from "@/lib/concept-themes"
+import { motion } from "@/lib/motion"
+import { cn } from "@/lib/utils"
 
-import { ConceptExplorerShell } from "./concept-explorer-shell";
+import { ConceptExplorerShell } from "./concept-explorer-shell"
 
-type HostingModelId = "onprem" | "iaas" | "paas" | "saas";
+type HostingModelId = "onprem" | "iaas" | "paas" | "saas"
 
-type Ownership = "open" | "proprietary" | "custom";
+type Ownership = "open" | "proprietary" | "custom"
 
-type TradeoffLevel = "high" | "medium" | "low";
+type TradeoffLevel = "high" | "medium" | "low"
 
-type TradeoffDimensionId = "control" | "effort" | "vendor" | "upfront";
+type TradeoffDimensionId = "control" | "effort" | "vendor" | "upfront"
 
 const stackLayers = [
   { id: "data", label: "Data & policy", note: "Records, patron data, config" },
@@ -37,22 +37,22 @@ const stackLayers = [
     label: "Servers & network",
     note: "Hardware, storage, uptime",
   },
-];
+]
 
 const hostingModels: {
-  id: HostingModelId;
-  label: string;
-  fullName: string;
-  providers: string;
-  icon: LucideIcon;
+  id: HostingModelId
+  label: string
+  fullName: string
+  providers: string
+  icon: LucideIcon
   /** Layers from the top of the stack that the library manages. */
-  libraryManages: number;
-  detail: string;
-  fit: string;
-  strengths: string[];
-  watch: string[];
-  levels: Record<TradeoffDimensionId, TradeoffLevel>;
-  examples: { name: string; ownership: Ownership }[];
+  libraryManages: number
+  detail: string
+  fit: string
+  strengths: string[]
+  watch: string[]
+  levels: Record<TradeoffDimensionId, TradeoffLevel>
+  examples: { name: string; ownership: Ownership }[]
 }[] = [
   {
     id: "onprem",
@@ -172,12 +172,12 @@ const hostingModels: {
       { name: "Springshare LibGuides", ownership: "proprietary" },
     ],
   },
-];
+]
 
 const tradeoffDimensions: {
-  id: TradeoffDimensionId;
-  label: string;
-  higherIsBetter: boolean;
+  id: TradeoffDimensionId
+  label: string
+  higherIsBetter: boolean
 }[] = [
   { id: "control", label: "Control & customization", higherIsBetter: true },
   { id: "effort", label: "Staff technical effort", higherIsBetter: false },
@@ -187,13 +187,13 @@ const tradeoffDimensions: {
     label: "Up-front infrastructure cost",
     higherIsBetter: false,
   },
-];
+]
 
 const levelLabel: Record<TradeoffLevel, string> = {
   high: "High",
   medium: "Medium",
   low: "Low",
-};
+}
 
 const ownershipBadge: Record<Ownership, { label: string; className: string }> =
   {
@@ -209,28 +209,28 @@ const ownershipBadge: Record<Ownership, { label: string; className: string }> =
       label: "Custom code",
       className: "border-sky-300 bg-sky-50 text-sky-900",
     },
-  };
+  }
 
 function tradeoffLevelStyles(level: TradeoffLevel, higherIsBetter: boolean) {
-  const isFavorable = higherIsBetter ? level === "high" : level === "low";
-  const isUnfavorable = higherIsBetter ? level === "low" : level === "high";
+  const isFavorable = higherIsBetter ? level === "high" : level === "low"
+  const isUnfavorable = higherIsBetter ? level === "low" : level === "high"
 
   if (isFavorable) {
-    return "border-emerald-300 bg-emerald-100 text-emerald-950";
+    return "border-emerald-300 bg-emerald-100 text-emerald-950"
   }
   if (isUnfavorable) {
-    return "border-rose-300 bg-rose-100 text-rose-950";
+    return "border-rose-300 bg-rose-100 text-rose-950"
   }
-  return "border-amber-300 bg-amber-100 text-amber-950";
+  return "border-amber-300 bg-amber-100 text-amber-950"
 }
 
-const theme = getConceptTheme("platform-tradeoffs");
+const theme = getConceptTheme("platform-tradeoffs")
 
 export function PlatformTradeoffsExplorer() {
-  const prefersReducedMotion = useReducedMotion() ?? false;
-  const [activeId, setActiveId] = useState<HostingModelId>("iaas");
+  const prefersReducedMotion = useReducedMotion() ?? false
+  const [activeId, setActiveId] = useState<HostingModelId>("iaas")
   const model =
-    hostingModels.find((entry) => entry.id === activeId) ?? hostingModels[0];
+    hostingModels.find((entry) => entry.id === activeId) ?? hostingModels[0]
 
   return (
     <ConceptExplorerShell
@@ -292,7 +292,7 @@ export function PlatformTradeoffsExplorer() {
             <Badge variant="outline">Library examples</Badge>
             <ul className="mt-3 space-y-2">
               {model.examples.map((example) => {
-                const badge = ownershipBadge[example.ownership];
+                const badge = ownershipBadge[example.ownership]
 
                 return (
                   <li
@@ -309,7 +309,7 @@ export function PlatformTradeoffsExplorer() {
                       {badge.label}
                     </span>
                   </li>
-                );
+                )
               })}
             </ul>
             <p className="mt-2 text-xs leading-5 text-muted-foreground">
@@ -321,7 +321,7 @@ export function PlatformTradeoffsExplorer() {
 
       <OwnershipStrip />
     </ConceptExplorerShell>
-  );
+  )
 }
 
 /** Desktop matrix: all four models side by side, canonical responsibility chart. */
@@ -330,16 +330,16 @@ function ResponsibilityMatrix({
   onSelect,
   prefersReducedMotion,
 }: {
-  activeId: HostingModelId;
-  onSelect: (id: HostingModelId) => void;
-  prefersReducedMotion: boolean;
+  activeId: HostingModelId
+  onSelect: (id: HostingModelId) => void
+  prefersReducedMotion: boolean
 }) {
   return (
     <div className="hidden grid-cols-[minmax(6rem,auto)_repeat(4,minmax(0,1fr))] gap-1.5 md:grid">
       <span aria-hidden="true" />
       {hostingModels.map((model) => {
-        const Icon = model.icon;
-        const isActive = model.id === activeId;
+        const Icon = model.icon
+        const isActive = model.id === activeId
 
         return (
           <button
@@ -370,7 +370,7 @@ function ResponsibilityMatrix({
               {model.label}
             </span>
           </button>
-        );
+        )
       })}
 
       {stackLayers.map((layer, layerIndex) => (
@@ -384,8 +384,8 @@ function ResponsibilityMatrix({
             </span>
           </span>
           {hostingModels.map((model) => {
-            const libraryManaged = layerIndex < model.libraryManages;
-            const isActive = model.id === activeId;
+            const libraryManaged = layerIndex < model.libraryManages
+            const isActive = model.id === activeId
 
             return (
               <span
@@ -400,12 +400,12 @@ function ResponsibilityMatrix({
               >
                 {libraryManaged ? "Library" : "Vendor"}
               </span>
-            );
+            )
           })}
         </Fragment>
       ))}
     </div>
-  );
+  )
 }
 
 /** Mobile: model picker plus the selected model's stack as a single column. */
@@ -413,15 +413,15 @@ function SelectedStack({
   model,
   onSelect,
 }: {
-  model: (typeof hostingModels)[number];
-  onSelect: (id: HostingModelId) => void;
+  model: (typeof hostingModels)[number]
+  onSelect: (id: HostingModelId) => void
 }) {
   return (
     <div className="space-y-3 md:hidden">
       <div className="grid grid-cols-2 gap-1.5">
         {hostingModels.map((entry) => {
-          const Icon = entry.icon;
-          const isActive = entry.id === model.id;
+          const Icon = entry.icon
+          const isActive = entry.id === model.id
 
           return (
             <button
@@ -439,12 +439,12 @@ function SelectedStack({
               <Icon className="size-3.5 shrink-0" />
               {entry.label}
             </button>
-          );
+          )
         })}
       </div>
       <ul className="space-y-1.5">
         {stackLayers.map((layer, layerIndex) => {
-          const libraryManaged = layerIndex < model.libraryManages;
+          const libraryManaged = layerIndex < model.libraryManages
 
           return (
             <li
@@ -463,11 +463,11 @@ function SelectedStack({
                 {libraryManaged ? "Library" : "Vendor"}
               </span>
             </li>
-          );
+          )
         })}
       </ul>
     </div>
-  );
+  )
 }
 
 function OwnershipStrip() {
@@ -481,8 +481,7 @@ function OwnershipStrip() {
       </h3>
       <p className="mt-1 text-sm leading-6 text-muted-foreground">
         Open source and proprietary software can each sit anywhere on the
-        hosting spectrum — ByWater-hosted Koha is open-source software delivered
-        like SaaS.
+        hosting spectrum.
       </p>
       <div className="mt-3 grid gap-3 sm:grid-cols-2">
         <OwnershipCard
@@ -503,17 +502,17 @@ function OwnershipStrip() {
         />
       </div>
     </section>
-  );
+  )
 }
 
 function OwnershipCard({
   ownership,
   items,
 }: {
-  ownership: Ownership;
-  items: string[];
+  ownership: Ownership
+  items: string[]
 }) {
-  const badge = ownershipBadge[ownership];
+  const badge = ownershipBadge[ownership]
 
   return (
     <div className="rounded-lg border bg-white p-3">
@@ -531,13 +530,13 @@ function OwnershipCard({
         ))}
       </ul>
     </div>
-  );
+  )
 }
 
 function TradeoffLabels({
   levels,
 }: {
-  levels: Record<TradeoffDimensionId, TradeoffLevel>;
+  levels: Record<TradeoffDimensionId, TradeoffLevel>
 }) {
   return (
     <div
@@ -550,7 +549,7 @@ function TradeoffLabels({
         <p className="text-lg font-semibold">Tradeoffs</p>
       </div>
       {tradeoffDimensions.map((dimension) => {
-        const level = levels[dimension.id];
+        const level = levels[dimension.id]
 
         return (
           <div
@@ -569,10 +568,10 @@ function TradeoffLabels({
               {levelLabel[level]}
             </span>
           </div>
-        );
+        )
       })}
     </div>
-  );
+  )
 }
 
 function TradeoffList({
@@ -580,9 +579,9 @@ function TradeoffList({
   label,
   tone = "watch",
 }: {
-  items: string[];
-  label: string;
-  tone?: "benefit" | "watch";
+  items: string[]
+  label: string
+  tone?: "benefit" | "watch"
 }) {
   return (
     <div>
@@ -597,5 +596,5 @@ function TradeoffList({
         ))}
       </ul>
     </div>
-  );
+  )
 }

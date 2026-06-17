@@ -1,9 +1,8 @@
 "use client";
 
 import type { ConceptSlug } from "@/lib/concepts";
-
+import { AiMlLibraryBrowser } from "./ai-ml-library-browser";
 import { AiMlLifecycleExplorer } from "./ai-ml-lifecycle-explorer";
-import { AiMlProjectExplorer } from "./ai-ml-project-explorer";
 import { ConceptMotionProvider } from "./concept-motion-provider";
 import { DevLifecycleExplorer } from "./dev-lifecycle-explorer";
 import { PlatformTradeoffsExplorer } from "./platform-tradeoffs-explorer";
@@ -28,6 +27,6 @@ function ConceptModule({ slug }: { slug: ConceptSlug }) {
     case "ai-ml-lifecycle":
       return <AiMlLifecycleExplorer />;
     case "ai-ml-libraries":
-      return <AiMlProjectExplorer />;
+      return <AiMlLibraryBrowser />;
   }
 }
