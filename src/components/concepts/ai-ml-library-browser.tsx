@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Check,
@@ -11,7 +11,7 @@ import {
   ShieldAlert,
   Sparkles,
   X,
-} from "lucide-react";
+} from "lucide-react"
 import {
   type MouseEvent,
   type ReactNode,
@@ -20,73 +20,71 @@ import {
   useMemo,
   useRef,
   useState,
-} from "react";
+} from "react"
 
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge"
+import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import definitionData from "@/data/definitions.json";
-import applicationsData from "@/data/library_ai_applications.json";
-import { getConceptTheme } from "@/lib/concept-themes";
-import { cn } from "@/lib/utils";
+} from "@/components/ui/card"
+import definitionData from "@/data/definitions.json"
+import applicationsData from "@/data/library_ai_applications.json"
+import { getConceptTheme } from "@/lib/concept-themes"
+import { cn } from "@/lib/utils"
 
-import { ConceptExplorerShell } from "./concept-explorer-shell";
+import { ConceptExplorerShell } from "./concept-explorer-shell"
 
 type Application = {
-  application: string;
-  primaryArea: string;
-  aiType: string;
-  technologyTags: string[];
-  maturity: string;
-  keyConcerns: string[];
-  applicationDefinition: string;
-  libraryExample: string;
-  relatedConcepts: string[];
-};
+  application: string
+  primaryArea: string
+  aiType: string
+  technologyTags: string[]
+  maturity: string
+  keyConcerns: string[]
+  applicationDefinition: string
+  libraryExample: string
+  relatedConcepts: string[]
+}
 
 type DefinitionEntry = {
-  term: string;
-  definition: string;
-  type: string;
-};
+  term: string
+  definition: string
+  type: string
+}
 
-type FacetKey = "primaryArea" | "aiType" | "maturity";
+type FacetKey = "primaryArea" | "aiType" | "maturity"
 
-type FacetSelection = Record<FacetKey, Set<string>>;
+type FacetSelection = Record<FacetKey, Set<string>>
 
 type TermPopoverState = {
-  left: number;
-  top: number;
-  width: number;
-};
+  left: number
+  top: number
+  width: number
+}
 
 type FacetMeta = {
-  key: FacetKey;
-  label: string;
-  description: string;
-  icon: LucideIcon;
-};
+  key: FacetKey
+  label: string
+  description: string
+  icon: LucideIcon
+}
 
-type Maturity = "Established" | "Emerging" | "Experimental";
+type Maturity = "Established" | "Emerging" | "Experimental"
 
-const applications = applicationsData as Application[];
+const applications = applicationsData as Application[]
 const sortedApplications = [...applications].sort((left, right) =>
   left.application.localeCompare(right.application, undefined, {
     sensitivity: "base",
   }),
-);
-const definitions = definitionData as DefinitionEntry[];
-const definitionIndex = new Map(
-  definitions.map((entry) => [entry.term, entry]),
-);
+)
+const definitions = definitionData as DefinitionEntry[]
+const definitionIndex = new Map(definitions.map((entry) => [entry.term, entry]))
 
-const maturityOrder: Maturity[] = ["Established", "Emerging", "Experimental"];
+const maturityOrder: Maturity[] = ["Established", "Emerging", "Experimental"]
 
 const maturityMeta: Record<
   Maturity,
@@ -96,21 +94,21 @@ const maturityMeta: Record<
     chip: "border-emerald-300 bg-emerald-100 text-emerald-950",
     dot: "bg-emerald-500",
     text: "Widely used and well understood",
-    card: "border-emerald-200/70 bg-emerald-50/70 hover:bg-emerald-50",
+    card: "border-emerald-200/70",
   },
   Emerging: {
     chip: "border-amber-300 bg-amber-100 text-amber-950",
     dot: "bg-amber-500",
     text: "Growing adoption, still evolving",
-    card: "border-amber-200/70 bg-amber-50/70 hover:bg-amber-50",
+    card: "border-amber-200/70",
   },
   Experimental: {
     chip: "border-violet-300 bg-violet-100 text-violet-950",
     dot: "bg-violet-500",
     text: "Limited deployment, pilots, or research",
-    card: "border-violet-200/70 bg-violet-50/70 hover:bg-violet-50",
+    card: "border-violet-200/70",
   },
-};
+}
 
 const facetMeta: FacetMeta[] = [
   {
@@ -131,39 +129,39 @@ const facetMeta: FacetMeta[] = [
     description: "How established the use case is in practice.",
     icon: Layers3,
   },
-];
+]
 
 const facetOptions: Record<FacetKey, string[]> = {
   primaryArea: uniqueValues(applications.map((item) => item.primaryArea)),
   aiType: uniqueValues(applications.map((item) => item.aiType)),
   maturity: maturityOrder,
-};
+}
 
-const theme = getConceptTheme("ai-ml-libraries");
-const drawerPanelClassName = "rounded-2xl border bg-white/90 p-4";
+const theme = getConceptTheme("ai-ml-libraries")
+const drawerPanelClassName = "rounded-2xl border bg-white/90 p-4"
 const termChipClassName =
-  "border-transparent bg-muted/30 text-foreground hover:border-foreground hover:bg-muted/60 focus-visible:border-foreground";
+  "border-transparent bg-muted/30 text-foreground hover:border-foreground hover:bg-muted/60 focus-visible:border-foreground"
 
 export function AiMlLibraryBrowser() {
-  const drawerRef = useRef<HTMLDivElement | null>(null);
-  const filtersRef = useRef<HTMLDivElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+  const drawerRef = useRef<HTMLDivElement | null>(null)
+  const filtersRef = useRef<HTMLDivElement | null>(null)
+  const contentRef = useRef<HTMLDivElement | null>(null)
   const [selectedApplication, setSelectedApplication] =
-    useState<Application | null>(null);
+    useState<Application | null>(null)
   const [draftFilters, setDraftFilters] = useState<FacetSelection>(() =>
     createEmptySelection(),
-  );
+  )
   const [appliedFilters, setAppliedFilters] = useState<FacetSelection>(() =>
     createEmptySelection(),
-  );
-  const [activeTerm, setActiveTerm] = useState<string | null>(null);
-  const [termPopover, setTermPopover] = useState<TermPopoverState | null>(null);
-  const [openFacet, setOpenFacet] = useState<FacetKey | null>(null);
+  )
+  const [activeTerm, setActiveTerm] = useState<string | null>(null)
+  const [termPopover, setTermPopover] = useState<TermPopoverState | null>(null)
+  const [openFacet, setOpenFacet] = useState<FacetKey | null>(null)
 
   const closeTermDefinition = useCallback(() => {
-    setActiveTerm(null);
-    setTermPopover(null);
-  }, []);
+    setActiveTerm(null)
+    setTermPopover(null)
+  }, [])
 
   const filteredApplications = useMemo(
     () =>
@@ -172,60 +170,58 @@ export function AiMlLibraryBrowser() {
           matchesFacet(application.primaryArea, appliedFilters.primaryArea) &&
           matchesFacet(application.aiType, appliedFilters.aiType) &&
           matchesFacet(application.maturity, appliedFilters.maturity)
-        );
+        )
       }),
     [appliedFilters],
-  );
+  )
 
   useEffect(() => {
     function onPointerDown(event: PointerEvent) {
-      const target = event.target as Node | null;
+      const target = event.target as Node | null
 
       if (
         !target ||
         drawerRef.current?.contains(target) ||
         filtersRef.current?.contains(target)
       ) {
-        return;
+        return
       }
 
-      closeTermDefinition();
-      setOpenFacet(null);
+      closeTermDefinition()
+      setOpenFacet(null)
     }
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        closeTermDefinition();
-        setOpenFacet(null);
+        closeTermDefinition()
+        setOpenFacet(null)
       }
     }
 
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("pointerdown", onPointerDown)
+    document.addEventListener("keydown", onKeyDown)
 
     return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [closeTermDefinition]);
+      document.removeEventListener("pointerdown", onPointerDown)
+      document.removeEventListener("keydown", onKeyDown)
+    }
+  }, [closeTermDefinition])
 
   const dirty = facetMeta.some((facet) => {
-    return !setsEqual(draftFilters[facet.key], appliedFilters[facet.key]);
-  });
+    return !setsEqual(draftFilters[facet.key], appliedFilters[facet.key])
+  })
 
   const selectedMatchesFilter =
     selectedApplication &&
     filteredApplications.some(
       (application) =>
         application.application === selectedApplication.application,
-    );
+    )
 
   const displayedApplication = selectedMatchesFilter
     ? selectedApplication
-    : null;
-  const selectedDefinition = activeTerm
-    ? definitionIndex.get(activeTerm)
-    : null;
+    : null
+  const selectedDefinition = activeTerm ? definitionIndex.get(activeTerm) : null
   const activeDefinition =
     selectedDefinition ??
     (activeTerm
@@ -234,42 +230,42 @@ export function AiMlLibraryBrowser() {
           definition: "Definition pending.",
           type: "concept",
         }
-      : null);
+      : null)
 
   function updateDraftFilter(key: FacetKey, value: string) {
     setDraftFilters((current) => {
-      const next = cloneSelection(current);
-      const bucket = next[key];
+      const next = cloneSelection(current)
+      const bucket = next[key]
 
       if (bucket.has(value)) {
-        bucket.delete(value);
+        bucket.delete(value)
       } else {
-        bucket.add(value);
+        bucket.add(value)
       }
 
-      return next;
-    });
+      return next
+    })
   }
 
   function applyFilters() {
-    setAppliedFilters(cloneSelection(draftFilters));
-    closeTermDefinition();
-    setOpenFacet(null);
+    setAppliedFilters(cloneSelection(draftFilters))
+    closeTermDefinition()
+    setOpenFacet(null)
 
     if (
       selectedApplication &&
       !matchesApplication(selectedApplication, draftFilters)
     ) {
-      setSelectedApplication(null);
+      setSelectedApplication(null)
     }
   }
 
   function clearFilters() {
-    const empty = createEmptySelection();
-    setDraftFilters(empty);
-    setAppliedFilters(empty);
-    closeTermDefinition();
-    setOpenFacet(null);
+    const empty = createEmptySelection()
+    setDraftFilters(empty)
+    setAppliedFilters(empty)
+    closeTermDefinition()
+    setOpenFacet(null)
   }
 
   function openTermDefinition(
@@ -277,31 +273,31 @@ export function AiMlLibraryBrowser() {
     event: MouseEvent<HTMLButtonElement>,
   ) {
     if (activeTerm === term) {
-      closeTermDefinition();
-      return;
+      closeTermDefinition()
+      return
     }
 
-    const contentBox = contentRef.current?.getBoundingClientRect();
-    const triggerBox = event.currentTarget.getBoundingClientRect();
+    const contentBox = contentRef.current?.getBoundingClientRect()
+    const triggerBox = event.currentTarget.getBoundingClientRect()
     const width = contentBox
       ? Math.max(220, Math.min(320, contentBox.width - 24))
-      : 320;
+      : 320
     const leftOffset = contentBox
       ? clamp(
           triggerBox.left - contentBox.left,
           12,
           contentBox.width - width - 12,
         )
-      : 12;
+      : 12
 
-    setActiveTerm(term);
+    setActiveTerm(term)
     setTermPopover({
       left: leftOffset,
       top: contentBox
         ? triggerBox.bottom - contentBox.top + 10
         : triggerBox.bottom + 10,
       width,
-    });
+    })
   }
 
   return (
@@ -314,14 +310,7 @@ export function AiMlLibraryBrowser() {
           aria-label="Browse filters"
           className="rounded-2xl border bg-white/90"
         >
-          <CardHeader className="border-b border-border/60 pb-4">
-            <div className="flex flex-wrap justify-end gap-3 pt-2">
-              <Badge className="gap-1.5" variant="secondary">
-                <Sparkles className="size-3.5" />
-                {filteredApplications.length} / {applications.length} ideas
-              </Badge>
-            </div>
-          </CardHeader>
+          <CardHeader className="pb-4"></CardHeader>
           <CardContent className="space-y-5 p-4">
             <div ref={filtersRef} className="grid gap-4 xl:grid-cols-3">
               {facetMeta.map((facet) => (
@@ -339,18 +328,8 @@ export function AiMlLibraryBrowser() {
               ))}
             </div>
 
-            <div className="flex flex-col gap-3 border-t pt-4 sm:flex-row sm:items-center sm:justify-between">
-              <MaturityLegend />
-
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex flex-wrap gap-2">
-                <button
-                  className={buttonVariants({ variant: "outline" })}
-                  onClick={clearFilters}
-                  type="button"
-                >
-                  <X className="size-4" />
-                  Clear
-                </button>
                 <button
                   className={buttonVariants({ variant: "default" })}
                   disabled={!dirty}
@@ -359,6 +338,20 @@ export function AiMlLibraryBrowser() {
                 >
                   Apply filters
                 </button>
+                <button
+                  className={buttonVariants({ variant: "outline" })}
+                  onClick={clearFilters}
+                  type="button"
+                >
+                  <X className="size-4" />
+                  Clear
+                </button>
+              </div>
+              <div className="flex flex-wrap justify-end gap-3 pt-2">
+                <Badge className="gap-1.5" variant="secondary">
+                  <Sparkles className="size-3.5" />
+                  {filteredApplications.length} / {applications.length} ideas
+                </Badge>
               </div>
             </div>
           </CardContent>
@@ -380,8 +373,8 @@ export function AiMlLibraryBrowser() {
                       application.application
                     }
                     onSelect={() => {
-                      setSelectedApplication(application);
-                      closeTermDefinition();
+                      setSelectedApplication(application)
+                      closeTermDefinition()
                     }}
                     onTermClick={openTermDefinition}
                   />
@@ -430,7 +423,7 @@ export function AiMlLibraryBrowser() {
         </div>
       </div>
     </ConceptExplorerShell>
-  );
+  )
 }
 
 function FacetDropdown({
@@ -441,18 +434,18 @@ function FacetDropdown({
   isOpen,
   onOpenChange,
 }: {
-  facet: FacetMeta;
-  options: string[];
-  onToggle: (key: FacetKey, value: string) => void;
-  selectedValues: Set<string>;
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
+  facet: FacetMeta
+  options: string[]
+  onToggle: (key: FacetKey, value: string) => void
+  selectedValues: Set<string>
+  isOpen: boolean
+  onOpenChange: (open: boolean) => void
 }) {
-  const Icon = facet.icon;
-  const summary = facetSummary(facet.key, selectedValues);
-  const selectedCount = selectedValues.size;
-  const headingId = `facet-${facet.key}-heading`;
-  const listboxId = `facet-${facet.key}-listbox`;
+  const Icon = facet.icon
+  const summary = facetSummary(facet.key, selectedValues)
+  const selectedCount = selectedValues.size
+  const headingId = `facet-${facet.key}-heading`
+  const listboxId = `facet-${facet.key}-listbox`
 
   return (
     <section className="relative rounded-2xl border border-border/70 bg-rose-50/35 p-4">
@@ -515,8 +508,8 @@ function FacetDropdown({
           <div className="max-h-64 overflow-auto pr-1">
             <ul className="space-y-1">
               {options.map((option) => {
-                const selected = selectedValues.has(option);
-                const isMaturity = facet.key === "maturity";
+                const selected = selectedValues.has(option)
+                const isMaturity = facet.key === "maturity"
 
                 return (
                   <li key={option}>
@@ -555,14 +548,14 @@ function FacetDropdown({
                       <span className="flex-1">{option}</span>
                     </button>
                   </li>
-                );
+                )
               })}
             </ul>
           </div>
         </div>
       ) : null}
     </section>
-  );
+  )
 }
 
 function ApplicationCard({
@@ -571,10 +564,10 @@ function ApplicationCard({
   onSelect,
   onTermClick,
 }: {
-  application: Application;
-  isSelected: boolean;
-  onSelect: () => void;
-  onTermClick: (term: string, event: MouseEvent<HTMLButtonElement>) => void;
+  application: Application
+  isSelected: boolean
+  onSelect: () => void
+  onTermClick: (term: string, event: MouseEvent<HTMLButtonElement>) => void
 }) {
   return (
     <div className="group relative h-full">
@@ -586,7 +579,7 @@ function ApplicationCard({
       />
       <Card
         className={cn(
-          "h-full border transition-all duration-200",
+          "flex h-full flex-col border transition-all duration-200 pb-0",
           getMaturityMeta(application.maturity).card,
           isSelected
             ? "border-rose-500 shadow-md ring-2 ring-rose-500/20"
@@ -602,33 +595,43 @@ function ApplicationCard({
               {application.primaryArea}
             </CardDescription>
           </div>
-
-          <div className="flex flex-wrap gap-2">
+        </CardHeader>
+        <CardContent className="flex flex-1 flex-col gap-3 pb-4">
+          <CardDescription className="text-sm leading-6 text-foreground">
+            {application.applicationDefinition}
+          </CardDescription>
+          <p className="text-xs leading-6 text-muted-foreground">
+            <span className="font-semibold text-foreground">Type:</span>{" "}
             <button
-              className="relative z-20 inline-flex h-6 items-center rounded-4xl border border-transparent bg-white px-2.5 py-0.5 text-xs font-medium text-foreground transition-colors hover:border-foreground focus-visible:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+              className="relative z-20 font-medium text-foreground underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
               onClick={(event) => onTermClick(application.aiType, event)}
               type="button"
             >
               {application.aiType}
             </button>
+          </p>
+          <div className="mt-auto flex justify-end">
+            <Badge
+              className={cn(
+                "relative z-20",
+                getMaturityMeta(application.maturity).chip,
+              )}
+            >
+              {application.maturity}
+            </Badge>
           </div>
-        </CardHeader>
-        <CardContent className="space-y-3 pb-4">
-          <CardDescription className="text-sm leading-6 text-foreground">
-            {application.applicationDefinition}
-          </CardDescription>
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }
 
 function ApplicationDrawer({
   application,
   onTermClick,
 }: {
-  application: Application;
-  onTermClick: (term: string, event: MouseEvent<HTMLButtonElement>) => void;
+  application: Application
+  onTermClick: (term: string, event: MouseEvent<HTMLButtonElement>) => void
 }) {
   return (
     <div className="space-y-5">
@@ -680,7 +683,7 @@ function ApplicationDrawer({
       </DrawerSection>
 
       <TermGroup
-        label="Technology tags"
+        label="Technology"
         onTermClick={onTermClick}
         terms={application.technologyTags}
       />
@@ -690,7 +693,7 @@ function ApplicationDrawer({
         terms={application.relatedConcepts}
       />
     </div>
-  );
+  )
 }
 
 function DrawerSection({
@@ -699,10 +702,10 @@ function DrawerSection({
   icon: Icon,
   label,
 }: {
-  boxClassName?: string;
-  children: ReactNode;
-  icon?: LucideIcon;
-  label: string;
+  boxClassName?: string
+  children: ReactNode
+  icon?: LucideIcon
+  label: string
 }) {
   return (
     <section className="space-y-2">
@@ -712,15 +715,15 @@ function DrawerSection({
       </div>
       <div className={boxClassName}>{children}</div>
     </section>
-  );
+  )
 }
 
 function TermButton({
   onTermClick,
   term,
 }: {
-  onTermClick: (term: string, event: MouseEvent<HTMLButtonElement>) => void;
-  term: string;
+  onTermClick: (term: string, event: MouseEvent<HTMLButtonElement>) => void
+  term: string
 }) {
   return (
     <button
@@ -736,7 +739,7 @@ function TermButton({
     >
       {term}
     </button>
-  );
+  )
 }
 
 function TermGroup({
@@ -744,9 +747,9 @@ function TermGroup({
   terms,
   onTermClick,
 }: {
-  label: string;
-  terms: string[];
-  onTermClick: (term: string, event: MouseEvent<HTMLButtonElement>) => void;
+  label: string
+  terms: string[]
+  onTermClick: (term: string, event: MouseEvent<HTMLButtonElement>) => void
 }) {
   return (
     <DrawerSection label={label}>
@@ -758,31 +761,22 @@ function TermGroup({
         ))}
       </ul>
     </DrawerSection>
-  );
+  )
 }
 
 function EmptyDrawer() {
   return (
     <div className="space-y-4">
-      <Badge className="gap-1.5" variant="secondary">
-        <PanelRightOpen className="size-3.5" />
-        Drawer
-      </Badge>
       <div>
         <h3 className="text-xl font-semibold tracking-normal text-balance">
-          Select an application
+          Application Details
         </h3>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">
-          The drawer opens here when you click a card. Use the term chips to
-          pull up short definitions as you browse.
+          Select an application card to view more details.
         </p>
       </div>
-      <div className="rounded-2xl border border-dashed border-border/70 bg-muted/20 p-4 text-sm leading-6 text-muted-foreground">
-        Start with any path, then layer the filters on top when you want to
-        narrow the list.
-      </div>
     </div>
-  );
+  )
 }
 
 function TermPopover({
@@ -790,9 +784,9 @@ function TermPopover({
   position,
   onClose,
 }: {
-  definition: DefinitionEntry;
-  position: TermPopoverState;
-  onClose: () => void;
+  definition: DefinitionEntry
+  position: TermPopoverState
+  onClose: () => void
 }) {
   return (
     <div
@@ -805,12 +799,7 @@ function TermPopover({
     >
       <div className="rounded-2xl border border-border/80 bg-white p-4 shadow-xl">
         <div className="mb-3 flex items-start justify-between gap-3">
-          <div className="space-y-1">
-            <Badge variant="outline">
-              {definitionTypeLabel(definition.type)}
-            </Badge>
-            <h4 className="text-sm font-semibold">{definition.term}</h4>
-          </div>
+          <div className="text-sm font-semibold">{definition.term}</div>
           <button
             aria-label={`Close definition for ${definition.term}`}
             className={buttonVariants({ size: "icon-xs", variant: "ghost" })}
@@ -825,45 +814,28 @@ function TermPopover({
         </p>
       </div>
     </div>
-  );
-}
-
-function MaturityLegend() {
-  return (
-    <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-      <span className="font-medium">Maturity key:</span>
-      {maturityOrder.map((value) => (
-        <span className="inline-flex items-center gap-1.5" key={value}>
-          <span
-            aria-hidden="true"
-            className={cn("size-2 rounded-full", maturityMeta[value].dot)}
-          />
-          {value}
-        </span>
-      ))}
-    </p>
-  );
+  )
 }
 
 function facetSummary(key: FacetKey, selectedValues: Set<string>) {
   if (selectedValues.size === 0) {
     switch (key) {
       case "primaryArea":
-        return "Any primary area";
+        return "Any primary area"
       case "aiType":
-        return "Any AI type";
+        return "Any AI type"
       case "maturity":
-        return "Any maturity";
+        return "Any maturity"
     }
   }
 
-  const values = [...selectedValues];
+  const values = [...selectedValues]
 
   if (values.length === 1) {
-    return values[0];
+    return values[0]
   }
 
-  return `${values.length} selected`;
+  return `${values.length} selected`
 }
 
 function createEmptySelection(): FacetSelection {
@@ -871,7 +843,7 @@ function createEmptySelection(): FacetSelection {
     primaryArea: new Set<string>(),
     aiType: new Set<string>(),
     maturity: new Set<string>(),
-  };
+  }
 }
 
 function cloneSelection(selection: FacetSelection): FacetSelection {
@@ -879,25 +851,25 @@ function cloneSelection(selection: FacetSelection): FacetSelection {
     primaryArea: new Set(selection.primaryArea),
     aiType: new Set(selection.aiType),
     maturity: new Set(selection.maturity),
-  };
+  }
 }
 
 function setsEqual(left: Set<string>, right: Set<string>) {
   if (left.size !== right.size) {
-    return false;
+    return false
   }
 
   for (const value of left) {
     if (!right.has(value)) {
-      return false;
+      return false
     }
   }
 
-  return true;
+  return true
 }
 
 function matchesFacet(value: string, selection: Set<string>) {
-  return selection.size === 0 || selection.has(value);
+  return selection.size === 0 || selection.has(value)
 }
 
 function matchesApplication(
@@ -908,40 +880,27 @@ function matchesApplication(
     matchesFacet(application.primaryArea, selection.primaryArea) &&
     matchesFacet(application.aiType, selection.aiType) &&
     matchesFacet(application.maturity, selection.maturity)
-  );
+  )
 }
 
 function uniqueValues(values: string[]) {
   return [...new Set(values)].sort((left, right) =>
     left.localeCompare(right, undefined, { sensitivity: "base" }),
-  );
+  )
 }
 
 function clamp(value: number, min: number, max: number) {
   if (max < min) {
-    return min;
+    return min
   }
 
-  return Math.min(Math.max(value, min), max);
+  return Math.min(Math.max(value, min), max)
 }
 
 function getMaturityMeta(value: string) {
-  return maturityMeta[isMaturity(value) ? value : "Emerging"];
+  return maturityMeta[isMaturity(value) ? value : "Emerging"]
 }
 
 function isMaturity(value: string): value is Maturity {
-  return maturityOrder.includes(value as Maturity);
-}
-
-function definitionTypeLabel(type: string) {
-  switch (type) {
-    case "technology":
-      return "Technology";
-    case "key-concern":
-      return "Concern";
-    case "maturity":
-      return "Maturity";
-    default:
-      return "Concept";
-  }
+  return maturityOrder.includes(value as Maturity)
 }
