@@ -15,6 +15,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { concepts, getConcept, getConceptNeighbors } from "@/lib/concepts";
+import { getConceptTheme } from "@/lib/concept-themes";
+import { cn } from "@/lib/utils";
 
 type PageProps = {
   params: Promise<{
@@ -55,6 +57,7 @@ export default async function ConceptPage({ params }: PageProps) {
   }
 
   const { previous, next } = getConceptNeighbors(concept.slug);
+  const theme = getConceptTheme(concept.slug);
 
   return (
     <main className="page-shell page-shell-concept">
@@ -69,7 +72,12 @@ export default async function ConceptPage({ params }: PageProps) {
         <header className="grid gap-5 rounded-xl border bg-white/90 p-5 shadow-xs lg:grid-cols-[1fr_360px]">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <span
+                className={cn(
+                  "flex size-11 shrink-0 items-center justify-center rounded-lg",
+                  theme.iconBadge,
+                )}
+              >
                 <ConceptIcon className="size-5" slug={concept.slug} />
               </span>
               <h1 className="text-3xl font-semibold tracking-normal text-balance sm:text-4xl">

@@ -1,28 +1,29 @@
-import type { ConceptSlug } from "@/lib/concepts";
+import type { ConceptSlug } from "@/lib/concepts"
 
 export type ConceptLayoutRhythm =
   | "cycle"
   | "pipeline"
   | "journey"
   | "quadrant"
-  | "categories";
+  | "categories"
 
 export type ConceptTheme = {
-  slug: ConceptSlug;
-  layout: ConceptLayoutRhythm;
-  card: string;
-  shell: string;
-  header: string;
-  contentGap: string;
-  detailPanel: string;
-  iconBadge: string;
-  accentText: string;
-  accentMuted: string;
-  accentSurface: string;
-  activeControl: string;
-  inactiveControl: string;
-  callout: string;
-};
+  slug: ConceptSlug
+  layout: ConceptLayoutRhythm
+  card: string
+  shell: string
+  header: string
+  contentGap: string
+  detailPanel: string
+  iconBadge: string
+  iconBadgeHover: string
+  accentText: string
+  accentMuted: string
+  accentSurface: string
+  activeControl: string
+  inactiveControl: string
+  callout: string
+}
 
 const themes: Record<ConceptSlug, ConceptTheme> = {
   "ai-ml-lifecycle": {
@@ -34,6 +35,7 @@ const themes: Record<ConceptSlug, ConceptTheme> = {
     contentGap: "space-y-7",
     detailPanel: "rounded-2xl border bg-white p-5",
     iconBadge: "bg-indigo-700 text-white",
+    iconBadgeHover: "hover:bg-indigo-800 hover:text-white",
     accentText: "text-indigo-950",
     accentMuted: "text-indigo-900",
     accentSurface: "bg-indigo-50",
@@ -50,6 +52,7 @@ const themes: Record<ConceptSlug, ConceptTheme> = {
     contentGap: "space-y-8",
     detailPanel: "rounded-xl border bg-white p-4",
     iconBadge: "bg-cyan-700 text-white",
+    iconBadgeHover: "hover:bg-cyan-800 hover:text-white",
     accentText: "text-cyan-950",
     accentMuted: "text-cyan-900",
     accentSurface: "bg-cyan-50",
@@ -66,6 +69,7 @@ const themes: Record<ConceptSlug, ConceptTheme> = {
     contentGap: "space-y-5",
     detailPanel: "rounded-xl border bg-white p-5",
     iconBadge: "bg-emerald-700 text-white",
+    iconBadgeHover: "hover:bg-emerald-800 hover:text-white",
     accentText: "text-emerald-950",
     accentMuted: "text-emerald-900",
     accentSurface: "bg-emerald-50",
@@ -81,7 +85,8 @@ const themes: Record<ConceptSlug, ConceptTheme> = {
     header: "sm:px-1",
     contentGap: "space-y-6",
     detailPanel: "rounded-xl border bg-white p-5",
-    iconBadge: "bg-amber-700 text-white",
+    iconBadge: "bg-yellow-700 text-white",
+    iconBadgeHover: "hover:bg-amber-900 hover:text-white",
     accentText: "text-amber-950",
     accentMuted: "text-amber-900",
     accentSurface: "bg-amber-50",
@@ -98,6 +103,7 @@ const themes: Record<ConceptSlug, ConceptTheme> = {
     contentGap: "space-y-6",
     detailPanel: "rounded-2xl border bg-white p-5 shadow-sm",
     iconBadge: "bg-rose-700 text-white",
+    iconBadgeHover: "hover:bg-rose-800 hover:text-white",
     accentText: "text-rose-950",
     accentMuted: "text-rose-900",
     accentSurface: "bg-rose-50",
@@ -105,8 +111,8 @@ const themes: Record<ConceptSlug, ConceptTheme> = {
     inactiveControl: "hover:border-rose-200 hover:bg-rose-50/70",
     callout: "text-sm text-rose-950",
   },
-};
+}
 
 export function getConceptTheme(slug: ConceptSlug): ConceptTheme {
-  return themes[slug];
+  return themes[slug]
 }

@@ -12,6 +12,8 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { concepts } from "@/lib/concepts"
+import { getConceptTheme } from "@/lib/concept-themes"
+import { cn } from "@/lib/utils"
 
 export default function Home() {
   return (
@@ -46,14 +48,22 @@ export default function Home() {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-            {concepts.map((concept, index) => (
+            {concepts.map((concept, index) => {
+              const theme = getConceptTheme(concept.slug)
+
+              return (
               <Card
                 className="group bg-white/90 transition-colors hover:border-primary/30"
                 key={concept.slug}
               >
                 <CardHeader>
                   <div className="mb-3 flex items-start justify-between gap-3">
-                    <span className="flex size-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                    <span
+                      className={cn(
+                        "flex size-10 items-center justify-center rounded-lg",
+                        theme.iconBadge,
+                      )}
+                    >
                       <ConceptIcon className="size-5" slug={concept.slug} />
                     </span>
                     <Badge variant="outline">
@@ -68,10 +78,14 @@ export default function Home() {
                     {concept.definition}
                   </p>
                   <Link
-                    className={buttonVariants({
-                      className: "mt-auto w-full justify-between",
-                      variant: "secondary",
-                    })}
+                    className={cn(
+                      buttonVariants({
+                        className: "mt-auto w-full justify-between",
+                        variant: "ghost",
+                      }),
+                      theme.iconBadge,
+                      theme.iconBadgeHover,
+                    )}
                     href={`/concepts/${concept.slug}`}
                   >
                     Open topic
@@ -79,7 +93,8 @@ export default function Home() {
                   </Link>
                 </CardContent>
               </Card>
-            ))}
+              )
+            })}
           </div>
         </section>
         <div>
