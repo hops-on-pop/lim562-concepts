@@ -18,6 +18,8 @@ export function ConceptExplorerShell({
   howItWorks,
   children,
   className,
+  contentClassName,
+  scrollContent = true,
 }: {
   slug: ConceptSlug;
   title?: string;
@@ -25,12 +27,21 @@ export function ConceptExplorerShell({
   howItWorks?: string;
   children: React.ReactNode;
   className?: string;
+  contentClassName?: string;
+  scrollContent?: boolean;
 }) {
   const theme = getConceptTheme(slug);
   const showHeader = title || howItWorks || description;
 
   return (
-    <Card className={cn(theme.card, theme.shell, className)}>
+    <Card
+      className={cn(
+        theme.card,
+        theme.shell,
+        "flex max-h-[125dvh] flex-col overflow-hidden",
+        className,
+      )}
+    >
       {showHeader ? (
         <CardHeader className={theme.header}>
           {title ? <CardTitle>{title}</CardTitle> : null}
@@ -47,7 +58,12 @@ export function ConceptExplorerShell({
         </CardHeader>
       ) : null}
       <CardContent
-        className={cn(theme.contentGap, "flex min-h-0 flex-1 flex-col")}
+        className={cn(
+          theme.contentGap,
+          "flex min-h-0 flex-1 flex-col",
+          scrollContent ? "overflow-y-auto" : "overflow-visible",
+          contentClassName,
+        )}
       >
         {children}
       </CardContent>

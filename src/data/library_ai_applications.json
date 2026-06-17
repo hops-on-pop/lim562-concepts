@@ -4,16 +4,16 @@
     "primaryArea": "Reference Services",
     "audience": "Patron",
     "aiType": "Generative AI",
-    "technologyTags": ["LLM", "Generative AI", "RAG"],
+    "technologyTags": ["LLM", "RAG"],
     "maturity": "Emerging",
-    "keyConcerns": ["Hallucinations", "Accuracy"],
-    "applicationDefinition": "A conversational system that answers common library questions and guides users to services and resources.",
+    "keyConcerns": ["Accuracy", "Hallucinations"],
+    "applicationDefinition": "A conversational interface that answers common library questions and points users to the right services, policies, or resources. It can handle routine requests around hours, borrowing, and events while escalating more complex questions to staff. In practice, it works best when paired with a knowledge base and clear guardrails.",
     "libraryExample": "A public library chatbot answers questions about hours, borrowing policies, and upcoming programs.",
     "relatedConcepts": [
-      "User Services",
       "Chatbots",
-      "Generative AI",
-      "Customer Service"
+      "Customer Service",
+      "Reference Services",
+      "User Services"
     ]
   },
   {
@@ -21,17 +21,12 @@
     "primaryArea": "Reference Services",
     "audience": "Patron",
     "aiType": "Generative AI",
-    "technologyTags": ["LLM", "RAG", "Semantic Search", "Embeddings"],
+    "technologyTags": ["Embeddings", "LLM", "RAG", "Semantic Search"],
     "maturity": "Emerging",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "An AI tool that helps users plan and refine research by suggesting terms, sources, and search strategies.",
+    "applicationDefinition": "An AI tool that helps users shape a research question, find relevant terms, and identify promising sources or search strategies. It can support early-stage exploration, but staff or the user still need to verify source quality and relevance. It is most useful as a guided starting point rather than a replacement for expert research support.",
     "libraryExample": "A university library research assistant helps a student build search terms for a literature review.",
-    "relatedConcepts": [
-      "Research Support",
-      "Information Literacy",
-      "Discovery",
-      "Generative AI"
-    ]
+    "relatedConcepts": ["Discovery", "Information Literacy", "Research Support"]
   },
   {
     "application": "Citation Support",
@@ -41,13 +36,13 @@
     "technologyTags": ["LLM", "Natural Language Processing"],
     "maturity": "Emerging",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A tool that helps users create, format, or check citations in a chosen citation style.",
+    "applicationDefinition": "A tool that helps users create, format, or check citations in a chosen style. It can reduce formatting errors and save time when moving between styles such as APA, MLA, or Chicago. Final review is still important because source details and style rules can be easy to misapply.",
     "libraryExample": "A student pastes in source information and gets help converting citations into APA format.",
     "relatedConcepts": [
-      "Scholarly Communication",
       "Citations",
-      "Writing Support",
-      "Generative AI"
+      "Research Support",
+      "Scholarly Communication",
+      "Writing Support"
     ]
   },
   {
@@ -58,13 +53,13 @@
     "technologyTags": ["LLM", "Text Summarization"],
     "maturity": "Emerging",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A system that produces shorter versions of long articles, reports, or books while preserving key points.",
+    "applicationDefinition": "A system that condenses long articles, reports, or books into shorter versions that preserve the main ideas and findings. It can help users scan large amounts of material quickly and decide what deserves a full read. Summaries should be checked against the original source for nuance, omissions, and accuracy.",
     "libraryExample": "A graduate student uses summaries to decide which journal articles to read in full.",
     "relatedConcepts": [
-      "Research Support",
-      "Reading Assistance",
       "Discovery",
-      "Generative AI"
+      "Reading Assistance",
+      "Reading Support",
+      "Research Support"
     ]
   },
   {
@@ -72,15 +67,15 @@
     "primaryArea": "Reference Services",
     "audience": "Both",
     "aiType": "Natural Language Processing",
-    "technologyTags": ["Machine Translation", "Natural Language Processing"],
+    "technologyTags": ["Machine Translation"],
     "maturity": "Established",
     "keyConcerns": ["Accuracy", "Bias"],
-    "applicationDefinition": "A language-support tool that helps staff and patrons communicate across languages.",
+    "applicationDefinition": "A language-support tool that helps staff and patrons communicate across languages. It can translate basic questions, directions, and service information so more users can access support in their preferred language. Human review matters when the exchange involves policy, nuanced reference questions, or sensitive topics.",
     "libraryExample": "A librarian uses translation support to assist a patron who prefers Spanish.",
     "relatedConcepts": [
       "Accessibility",
-      "Inclusion",
-      "Translation",
+      "DEIA",
+      "Multilingual Services",
       "User Services"
     ]
   },
@@ -89,17 +84,12 @@
     "primaryArea": "Discovery",
     "audience": "Patron",
     "aiType": "Natural Language Processing",
-    "technologyTags": ["Embeddings", "Vector Search", "Semantic Search"],
+    "technologyTags": ["Embeddings", "Semantic Search", "Vector Search"],
     "maturity": "Established",
-    "keyConcerns": ["Transparency", "Bias"],
-    "applicationDefinition": "A search approach that retrieves results by meaning and intent instead of exact keyword matches.",
+    "keyConcerns": ["Bias", "Transparency"],
+    "applicationDefinition": "A search approach that retrieves results by meaning and intent instead of exact keyword matches. It can surface useful materials even when the user does not know the right vocabulary, which is especially helpful for interdisciplinary or exploratory searches. Because similarity is probabilistic, results still need curation and transparency.",
     "libraryExample": "A search for climate impacts on farming returns items about drought, agriculture, and food security.",
-    "relatedConcepts": [
-      "Search",
-      "Natural Language Processing",
-      "User Experience",
-      "Embeddings"
-    ]
+    "relatedConcepts": ["Discovery", "Metadata", "User Experience"]
   },
   {
     "application": "Personalized Recommendations",
@@ -108,65 +98,50 @@
     "aiType": "Machine Learning",
     "technologyTags": ["Recommendation Systems"],
     "maturity": "Established",
-    "keyConcerns": ["Privacy", "Bias"],
-    "applicationDefinition": "A recommendation system that suggests resources based on user behavior, interests, or usage patterns.",
+    "keyConcerns": ["Bias", "Privacy"],
+    "applicationDefinition": "A recommendation system that suggests resources based on user behavior, interests, or usage patterns. In a library setting, it can surface books, media, or services a user might otherwise miss. The design should be careful about privacy, bias, and the possibility of narrowing rather than broadening discovery.",
     "libraryExample": "A reader who borrows mystery novels gets recommendations for new crime fiction titles.",
-    "relatedConcepts": [
-      "Recommendations",
-      "Analytics",
-      "User Experience",
-      "Machine Learning"
-    ]
+    "relatedConcepts": ["Analytics", "Discovery", "User Experience"]
   },
   {
     "application": "Search Query Expansion",
     "primaryArea": "Discovery",
     "audience": "Patron",
     "aiType": "Natural Language Processing",
-    "technologyTags": ["Query Expansion", "Natural Language Processing"],
+    "technologyTags": ["Query Expansion"],
     "maturity": "Established",
     "keyConcerns": ["Accuracy", "Transparency"],
-    "applicationDefinition": "A search feature that adds related terms, synonyms, or broader subjects to improve retrieval.",
+    "applicationDefinition": "A search feature that adds related terms, synonyms, or broader subjects to improve retrieval. It can help bridge wording differences between users and catalog language, especially when a topic has multiple names or spellings. Users should be able to see and control the expanded query when possible.",
     "libraryExample": "A search for 'heart attack' suggests related medical terms such as myocardial infarction.",
-    "relatedConcepts": [
-      "Search",
-      "Natural Language Processing",
-      "Metadata",
-      "Query Expansion"
-    ]
+    "relatedConcepts": ["Discovery", "Metadata", "Reference Services"]
   },
   {
-    "application": "AI Readers' Advisory",
+    "application": "Readers' Advisory",
     "primaryArea": "Discovery",
     "audience": "Patron",
     "aiType": "Generative AI",
     "technologyTags": ["LLM", "Recommendation Systems"],
     "maturity": "Emerging",
     "keyConcerns": ["Bias", "Hallucinations"],
-    "applicationDefinition": "A reading recommendation tool that suggests books or media and explains how they match a user's interests.",
+    "applicationDefinition": "A reading recommendation tool that suggests books or media and explains how they match a user's interests. It can mimic the role of a librarian by connecting appeal factors, genres, and themes to likely matches. Because generative systems can overstate fit, staff or user review is still useful.",
     "libraryExample": "A patron asks for read-alikes to a favorite fantasy novel and receives suggested titles with brief appeal notes.",
-    "relatedConcepts": [
-      "Readers' Advisory",
-      "Recommendations",
-      "Generative AI",
-      "User Experience"
-    ]
+    "relatedConcepts": ["Discovery", "Readers' Advisory", "User Experience"]
   },
   {
     "application": "Automated Subject Assignment",
     "primaryArea": "Cataloging",
     "audience": "Staff",
     "aiType": "Machine Learning",
-    "technologyTags": ["Natural Language Processing", "Classification"],
+    "technologyTags": ["Classification", "Natural Language Processing"],
     "maturity": "Emerging",
-    "keyConcerns": ["Bias", "Accuracy"],
-    "applicationDefinition": "A cataloging support tool that suggests subject headings, descriptors, or keywords from item content.",
+    "keyConcerns": ["Accuracy", "Bias"],
+    "applicationDefinition": "A cataloging support tool that suggests subject headings, descriptors, or keywords from item content. It can speed up first-pass metadata work and help surface terms that staff might want to review or refine. Outputs should be checked for consistency, local practice, and coverage across communities.",
     "libraryExample": "A cataloger reviews subject heading suggestions for a newly acquired book.",
     "relatedConcepts": [
-      "Metadata",
       "Automation",
-      "Classification",
-      "Library Standards"
+      "Cataloging",
+      "Library Standards",
+      "Metadata"
     ]
   },
   {
@@ -177,14 +152,9 @@
     "technologyTags": ["LLM", "Metadata Generation"],
     "maturity": "Emerging",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A tool that creates draft descriptions, abstracts, keywords, or other metadata for review by staff.",
+    "applicationDefinition": "A tool that creates draft descriptions, abstracts, keywords, or other metadata for staff review. It is useful for speeding up routine descriptive work or for generating a starting point when many items need treatment quickly. Human review is essential to verify accuracy, controlled vocabulary, and local cataloging standards.",
     "libraryExample": "A repository generates a draft description for a faculty publication before staff review it.",
-    "relatedConcepts": [
-      "Metadata",
-      "Repositories",
-      "Automation",
-      "Generative AI"
-    ]
+    "relatedConcepts": ["Automation", "Metadata", "Repositories"]
   },
   {
     "application": "Metadata Cleanup",
@@ -194,30 +164,13 @@
     "technologyTags": ["Entity Resolution"],
     "maturity": "Established",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A quality-control tool that identifies inconsistent, incomplete, or potentially incorrect metadata records.",
+    "applicationDefinition": "A quality-control tool that identifies inconsistent, incomplete, or potentially incorrect metadata records. It can flag missing values, mismatched fields, duplicate variants, or records that need authority control. The goal is to accelerate review, not to replace cataloger judgment.",
     "libraryExample": "A library uses AI to flag records with missing publication dates and inconsistent subject terms.",
     "relatedConcepts": [
-      "Metadata",
-      "Quality Control",
-      "Data Management",
-      "Automation"
-    ]
-  },
-  {
-    "application": "Automated Classification",
-    "primaryArea": "Cataloging",
-    "audience": "Staff",
-    "aiType": "Machine Learning",
-    "technologyTags": ["Classification"],
-    "maturity": "Emerging",
-    "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A tool that recommends classification numbers or categories based on the content of a resource.",
-    "libraryExample": "A system suggests a Dewey Decimal number for a newly acquired title.",
-    "relatedConcepts": [
-      "Classification",
-      "Metadata",
       "Automation",
-      "Library Standards"
+      "Data Management",
+      "Metadata",
+      "Quality Control"
     ]
   },
   {
@@ -228,15 +181,9 @@
     "technologyTags": ["Named Entity Recognition"],
     "maturity": "Established",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A text-analysis tool that identifies names, places, organizations, dates, and other entities in documents.",
+    "applicationDefinition": "A text-analysis tool that identifies names, places, organizations, dates, and other entities in documents. In libraries and archives, it can help turn unstructured text into searchable, linked, or normalized metadata. Results are usually strongest when paired with human validation and local name authority practices.",
     "libraryExample": "An archive extracts names and locations from oral history transcripts.",
-    "relatedConcepts": [
-      "Natural Language Processing",
-      "Metadata",
-      "Archives",
-      "Linked Data",
-      "Named Entity Recognition"
-    ]
+    "relatedConcepts": ["Archives", "Cataloging", "Linked Data", "Metadata"]
   },
   {
     "application": "Record Deduplication",
@@ -246,13 +193,13 @@
     "technologyTags": ["Entity Resolution"],
     "maturity": "Established",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A matching tool that identifies likely duplicate records so staff can merge or resolve them.",
+    "applicationDefinition": "A matching tool that identifies likely duplicate records so staff can merge or resolve them. It can help clean shared catalogs, repository records, or imported metadata at scale. Because false matches can create serious damage, the tool should be used with conservative thresholds and review workflows.",
     "libraryExample": "A shared catalog flags multiple records that appear to describe the same edition.",
     "relatedConcepts": [
-      "Metadata",
+      "Automation",
+      "Data Management",
       "Data Quality",
-      "Entity Resolution",
-      "Automation"
+      "Metadata"
     ]
   },
   {
@@ -260,12 +207,17 @@
     "primaryArea": "Digital Collections",
     "audience": "Both",
     "aiType": "Computer Vision",
-    "technologyTags": ["OCR", "Computer Vision"],
+    "technologyTags": ["OCR"],
     "maturity": "Established",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A digitization tool that converts scanned images of text into machine-readable text.",
+    "applicationDefinition": "A digitization tool that converts scanned images of text into machine-readable text. It makes historical newspapers, books, and documents searchable and more accessible, especially when paired with clean output and page-level structure. Accuracy can vary with image quality, fonts, and layout complexity.",
     "libraryExample": "A library digitizes historical newspapers and makes them searchable by keyword.",
-    "relatedConcepts": ["Archives", "Search", "Computer Vision", "Digitization"]
+    "relatedConcepts": [
+      "Accessibility",
+      "Archives",
+      "Digitization",
+      "Discovery"
+    ]
   },
   {
     "application": "Handwriting Recognition",
@@ -275,26 +227,21 @@
     "technologyTags": ["Handwriting Recognition"],
     "maturity": "Emerging",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A vision-based tool that converts handwritten text into machine-readable text.",
+    "applicationDefinition": "A vision-based tool that converts handwritten text into machine-readable text. It can help open up correspondence, field notes, marginalia, and archival materials that are otherwise difficult to search. Since handwriting is highly variable, staff review and correction are usually required.",
     "libraryExample": "An archive transcribes handwritten letters so researchers can search them digitally.",
-    "relatedConcepts": ["Archives", "Computer Vision", "Digitization", "Access"]
+    "relatedConcepts": ["Access", "Archives", "Digitization", "Transcription"]
   },
   {
     "application": "Image Recognition",
     "primaryArea": "Digital Collections",
     "audience": "Staff",
     "aiType": "Computer Vision",
-    "technologyTags": ["Object Detection", "Computer Vision"],
+    "technologyTags": ["Object Detection"],
     "maturity": "Established",
-    "keyConcerns": ["Bias", "Accuracy"],
-    "applicationDefinition": "A computer vision tool that identifies objects, people, places, or themes in images.",
+    "keyConcerns": ["Accuracy", "Bias"],
+    "applicationDefinition": "A computer vision tool that identifies objects, people, places, or themes in images. Libraries can use it to speed up description, tagging, and discovery for photograph or visual media collections. The system should be audited for bias, mislabeling, and uneven performance across image types.",
     "libraryExample": "A photograph collection is automatically tagged with subject terms and locations.",
-    "relatedConcepts": [
-      "Archives",
-      "Computer Vision",
-      "Metadata",
-      "Image Analysis"
-    ]
+    "relatedConcepts": ["Archives", "Discovery", "Image Analysis", "Metadata"]
   },
   {
     "application": "Audio Transcription",
@@ -303,8 +250,8 @@
     "aiType": "Natural Language Processing",
     "technologyTags": ["Speech Recognition"],
     "maturity": "Established",
-    "keyConcerns": ["Accuracy", "Accessibility"],
-    "applicationDefinition": "A speech technology tool that converts recorded audio or video into written text.",
+    "keyConcerns": ["Accessibility", "Accuracy"],
+    "applicationDefinition": "A speech technology tool that converts recorded audio or video into written text. It supports access, searching, and downstream editing for interviews, lectures, and oral histories. Accuracy depends on audio quality, accents, background noise, and domain-specific vocabulary.",
     "libraryExample": "A library creates transcripts for oral history interviews to improve access and searchability.",
     "relatedConcepts": ["Accessibility", "Archives", "Transcription"]
   },
@@ -313,12 +260,12 @@
     "primaryArea": "Digital Collections",
     "audience": "Staff",
     "aiType": "Generative AI",
-    "technologyTags": ["LLM", "Computer Vision"],
+    "technologyTags": ["Computer Vision", "LLM"],
     "maturity": "Emerging",
     "keyConcerns": ["Accuracy", "Representation"],
-    "applicationDefinition": "A generative tool that creates draft descriptions for items in digital collections or archives.",
+    "applicationDefinition": "A generative tool that creates draft descriptions for items in digital collections or archives. It can reduce the time needed to produce basic access points for large sets of material. Staff should review the output for descriptive accuracy, bias, and representation.",
     "libraryExample": "A digital exhibit receives draft descriptions for photographs before staff review them.",
-    "relatedConcepts": ["Metadata", "Archives", "Generative AI", "Description"]
+    "relatedConcepts": ["Archives", "Cataloging", "Metadata"]
   },
   {
     "application": "Collection Gap Analysis",
@@ -328,9 +275,9 @@
     "technologyTags": ["Data Mining"],
     "maturity": "Emerging",
     "keyConcerns": ["Bias"],
-    "applicationDefinition": "An analytics process that identifies subjects, communities, or perspectives that may be underrepresented in a collection.",
+    "applicationDefinition": "An analytics process that identifies subjects, communities, or perspectives that may be underrepresented in a collection. It can help selectors compare holdings against community needs, curricular priorities, or diversity goals. The results are only as good as the data and criteria used to define the gap.",
     "libraryExample": "A public library checks whether Indigenous authors are adequately represented in its holdings.",
-    "relatedConcepts": ["Diversity", "Assessment", "Analytics", "Equity"]
+    "relatedConcepts": ["Analytics", "Assessment", "DEIA"]
   },
   {
     "application": "Demand Forecasting",
@@ -340,14 +287,9 @@
     "technologyTags": ["Forecasting", "Predictive Analytics"],
     "maturity": "Established",
     "keyConcerns": ["Bias"],
-    "applicationDefinition": "A prediction tool that estimates future demand for materials, services, or formats.",
+    "applicationDefinition": "A prediction tool that estimates future demand for materials, services, or formats. It can help libraries plan purchases, staffing, and access models around expected use patterns. Forecasts should be treated as planning inputs, not fixed outcomes, because user behavior and context can change.",
     "libraryExample": "A library predicts increased demand for tax-preparation materials during the spring.",
-    "relatedConcepts": [
-      "Analytics",
-      "Planning",
-      "Forecasting",
-      "Predictive Analytics"
-    ]
+    "relatedConcepts": ["Assessment", "Collection Development", "Planning"]
   },
   {
     "application": "Acquisition Recommendations",
@@ -357,14 +299,9 @@
     "technologyTags": ["Recommendation Systems"],
     "maturity": "Emerging",
     "keyConcerns": ["Bias", "Transparency"],
-    "applicationDefinition": "A decision-support tool that suggests materials for purchase based on needs, trends, or usage patterns.",
+    "applicationDefinition": "A decision-support tool that suggests materials for purchase based on needs, trends, or usage patterns. It can help selectors scan a larger market and prioritize items that align with local goals. Recommendations should remain suggestions rather than automatic decisions, especially in niche or underserved areas.",
     "libraryExample": "A selector receives recommended titles in an emerging research area.",
-    "relatedConcepts": [
-      "Recommendations",
-      "Analytics",
-      "Purchasing",
-      "Decision Support"
-    ]
+    "relatedConcepts": ["Analytics", "Purchasing"]
   },
   {
     "application": "Weeding Support",
@@ -374,15 +311,9 @@
     "technologyTags": ["Predictive Analytics"],
     "maturity": "Emerging",
     "keyConcerns": ["Human Oversight"],
-    "applicationDefinition": "A review tool that flags materials that may deserve closer evaluation for retention, storage, or withdrawal.",
+    "applicationDefinition": "A review tool that flags materials that may deserve closer evaluation for retention, storage, or withdrawal. It can surface low-use items, duplicates, or aging content to help staff focus their review time. Final decisions should account for collection policy, historical value, and local context.",
     "libraryExample": "A library generates a list of low-use items for staff review before making weeding decisions.",
-    "relatedConcepts": [
-      "Collection Management",
-      "Assessment",
-      "Analytics",
-      "Selection",
-      "Decision Support"
-    ]
+    "relatedConcepts": ["Analytics", "Assessment", "Collection Management"]
   },
   {
     "application": "Usage Analytics",
@@ -392,14 +323,9 @@
     "technologyTags": ["Data Mining"],
     "maturity": "Established",
     "keyConcerns": ["Privacy"],
-    "applicationDefinition": "An analytics process that examines circulation, database use, website activity, or service metrics.",
+    "applicationDefinition": "An analytics process that examines circulation, database use, website activity, or service metrics. It helps libraries understand what is being used, where demand is rising, and where services may need adjustment. Privacy protections and careful interpretation are essential.",
     "libraryExample": "A library reviews database usage data before renewing a subscription.",
-    "relatedConcepts": [
-      "Analytics",
-      "Decision Support",
-      "Usage Data",
-      "Statistics"
-    ]
+    "relatedConcepts": ["Analytics"]
   },
   {
     "application": "Predictive Analytics",
@@ -409,31 +335,9 @@
     "technologyTags": ["Forecasting"],
     "maturity": "Emerging",
     "keyConcerns": ["Bias", "Privacy"],
-    "applicationDefinition": "A data-analysis approach that uses historical patterns to forecast future outcomes or needs.",
+    "applicationDefinition": "A data-analysis approach that uses historical patterns to forecast future outcomes or needs. Libraries may use it for staffing, space planning, service demand, or collection decisions. Predictions should be reviewed for bias and validated against real-world conditions.",
     "libraryExample": "A library predicts future study room demand based on prior usage trends.",
-    "relatedConcepts": [
-      "Analytics",
-      "Planning",
-      "Forecasting",
-      "Decision Support"
-    ]
-  },
-  {
-    "application": "Sentiment Analysis",
-    "primaryArea": "Assessment",
-    "audience": "Staff",
-    "aiType": "Natural Language Processing",
-    "technologyTags": ["Sentiment Analysis"],
-    "maturity": "Established",
-    "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A text-analysis technique that identifies opinions, emotions, or attitudes in written feedback.",
-    "libraryExample": "A library analyzes survey comments to understand how patrons feel about a new service.",
-    "relatedConcepts": [
-      "Natural Language Processing",
-      "Feedback",
-      "Analytics",
-      "User Experience"
-    ]
+    "relatedConcepts": ["Analytics", "Planning"]
   },
   {
     "application": "Information Literacy Tutor",
@@ -443,30 +347,13 @@
     "technologyTags": ["LLM", "RAG"],
     "maturity": "Emerging",
     "keyConcerns": ["Accuracy", "Hallucinations"],
-    "applicationDefinition": "An interactive learning tool that teaches research skills, source evaluation, and information literacy concepts.",
+    "applicationDefinition": "An interactive learning tool that teaches research skills, source evaluation, and information literacy concepts. It can provide practice questions, explanations, and step-by-step guidance tailored to the learner's needs. The tutor should reinforce good research habits rather than just supply answers.",
     "libraryExample": "A student gets guided practice evaluating whether a source is credible.",
     "relatedConcepts": [
       "Information Literacy",
+      "Instruction",
       "Learning Support",
-      "Research Support",
-      "Generative AI"
-    ]
-  },
-  {
-    "application": "Text Simplification",
-    "primaryArea": "Accessibility",
-    "audience": "Patron",
-    "aiType": "Generative AI",
-    "technologyTags": ["LLM", "Natural Language Processing"],
-    "maturity": "Emerging",
-    "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A tool that rewrites content in simpler language to improve understanding and accessibility.",
-    "libraryExample": "A library provides plain-language summaries of government documents for community members.",
-    "relatedConcepts": [
-      "Inclusion",
-      "Reading Support",
-      "Plain Language",
-      "Generative AI"
+      "Research Support"
     ]
   },
   {
@@ -477,14 +364,9 @@
     "technologyTags": ["Machine Translation"],
     "maturity": "Established",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A translation tool that converts text or speech between languages to support communication and access.",
+    "applicationDefinition": "A translation tool that converts text or speech between languages to support communication and access. It can help users navigate the library, understand instructions, or participate in services without waiting for human translation. The output still needs review when precision matters.",
     "libraryExample": "A patron uses a service desk kiosk that translates catalog instructions into their preferred language.",
-    "relatedConcepts": [
-      "Translation",
-      "Inclusion",
-      "Multilingual Services",
-      "Natural Language Processing"
-    ]
+    "relatedConcepts": ["Accessibility", "DEIA", "Multilingual Services"]
   },
   {
     "application": "Meeting Summarization",
@@ -493,49 +375,10 @@
     "aiType": "Generative AI",
     "technologyTags": ["LLM", "Text Summarization"],
     "maturity": "Established",
-    "keyConcerns": ["Privacy", "Accuracy"],
-    "applicationDefinition": "A productivity tool that creates summaries, action items, and notes from meetings or discussions.",
+    "keyConcerns": ["Accuracy", "Privacy"],
+    "applicationDefinition": "A productivity tool that creates summaries, action items, and notes from meetings or discussions. It helps staff quickly capture decisions and next steps without manually transcribing long conversations. Sensitive meetings require careful handling because summarizers may omit nuance or expose private information.",
     "libraryExample": "A library committee receives an automatically generated summary after a planning meeting.",
-    "relatedConcepts": [
-      "Productivity",
-      "Documentation",
-      "Generative AI",
-      "Meetings"
-    ]
-  },
-  {
-    "application": "Policy Drafting",
-    "primaryArea": "Administration",
-    "audience": "Staff",
-    "aiType": "Generative AI",
-    "technologyTags": ["LLM"],
-    "maturity": "Emerging",
-    "keyConcerns": ["Accountability"],
-    "applicationDefinition": "A writing assistant that helps staff draft internal policies, procedures, or guidelines.",
-    "libraryExample": "Staff draft a circulation policy outline before editing it for local needs.",
-    "relatedConcepts": [
-      "Policy",
-      "Documentation",
-      "Writing Support",
-      "Generative AI"
-    ]
-  },
-  {
-    "application": "Report Generation",
-    "primaryArea": "Administration",
-    "audience": "Staff",
-    "aiType": "Generative AI",
-    "technologyTags": ["LLM"],
-    "maturity": "Emerging",
-    "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A tool that drafts routine reports by assembling and summarizing information from multiple sources.",
-    "libraryExample": "A library generates a draft annual report from assessment data and service metrics.",
-    "relatedConcepts": [
-      "Reporting",
-      "Documentation",
-      "Analytics",
-      "Generative AI"
-    ]
+    "relatedConcepts": ["Documentation", "Productivity", "Reporting"]
   },
   {
     "application": "Grant Writing Support",
@@ -545,13 +388,13 @@
     "technologyTags": ["LLM"],
     "maturity": "Emerging",
     "keyConcerns": ["Copyright"],
-    "applicationDefinition": "A writing assistant that helps draft, refine, or organize grant proposals.",
+    "applicationDefinition": "A writing assistant that helps draft, refine, or organize grant proposals. It can speed up early drafting, tighten language, and help structure complex sections such as goals, methods, or impact. Users still need to verify funder requirements, originality, and factual claims.",
     "libraryExample": "A researcher uses AI to outline a grant narrative and strengthen the language in a proposal.",
     "relatedConcepts": [
-      "Writing Support",
       "Funding",
-      "Generative AI",
-      "Research Support"
+      "Research Support",
+      "Scholarly Communication",
+      "Writing Support"
     ]
   },
   {
@@ -559,16 +402,16 @@
     "primaryArea": "Scholarly Communication",
     "audience": "Patron",
     "aiType": "Machine Learning",
-    "technologyTags": ["Knowledge Graphs", "Analytics"],
+    "technologyTags": ["Analytics", "Knowledge Graphs"],
     "maturity": "Emerging",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "An analysis tool that visualizes themes, connections, or trends across a body of research.",
+    "applicationDefinition": "An analysis tool that visualizes themes, connections, or trends across a body of research. It can help researchers identify clusters, influential works, and underexplored topics more quickly than manual reading alone. The maps are most useful when combined with subject expertise and source verification.",
     "libraryExample": "A librarian maps the main topics appearing in recent articles on digital humanities.",
     "relatedConcepts": [
+      "Discovery",
+      "Research Evaluation",
       "Research Support",
-      "Analytics",
-      "Knowledge Graphs",
-      "Discovery"
+      "Scholarly Communication"
     ]
   },
   {
@@ -579,13 +422,13 @@
     "technologyTags": ["Analytics", "Citation Networks"],
     "maturity": "Established",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "An analytics process that examines citations, altmetrics, or collaboration patterns to estimate research influence.",
+    "applicationDefinition": "An analytics process that examines citations, altmetrics, or collaboration patterns to estimate research influence. Libraries can use it to support faculty reporting, promotion dossiers, or institutional assessment. Metrics should be interpreted carefully because they do not capture every dimension of scholarly value.",
     "libraryExample": "A library helps a faculty member review citation trends for a promotion dossier.",
     "relatedConcepts": [
       "Assessment",
-      "Analytics",
-      "Citation Networks",
-      "Research Evaluation"
+      "Reporting",
+      "Research Evaluation",
+      "Scholarly Communication"
     ]
   },
   {
@@ -596,67 +439,49 @@
     "technologyTags": ["LLM"],
     "maturity": "Emerging",
     "keyConcerns": ["Accuracy"],
-    "applicationDefinition": "A tool that helps researchers draft plans for organizing, preserving, and sharing research data.",
+    "applicationDefinition": "A tool that helps researchers draft plans for organizing, preserving, and sharing research data. It can prompt users to think through storage, documentation, access, and retention before a project begins. A human review is still important to ensure the plan matches funder and institutional requirements.",
     "libraryExample": "A graduate student uses AI to outline a data management plan for a grant application.",
     "relatedConcepts": [
-      "Research Data",
+      "Data Management",
       "Planning",
-      "Generative AI",
-      "Data Management"
+      "Research Data",
+      "Research Support"
     ]
   },
   {
-    "application": "AI Reading List Generator",
-    "primaryArea": "Emerging Applications",
+    "application": "Reading List Generator",
+    "primaryArea": "Discovery",
     "audience": "Both",
     "aiType": "Generative AI",
     "technologyTags": ["LLM", "Recommendation Systems"],
     "maturity": "Emerging",
-    "keyConcerns": ["Bias", "Accuracy"],
-    "applicationDefinition": "A curation tool that creates thematic reading lists based on topics, events, courses, or interests.",
+    "keyConcerns": ["Accuracy", "Bias"],
+    "applicationDefinition": "A curation tool that creates thematic reading lists based on topics, events, courses, or interests. It can help staff assemble a useful starting point for programs, instruction, or outreach faster than manual searching alone. Human review helps keep selections balanced, current, and audience-appropriate.",
     "libraryExample": "A librarian generates a reading list for a community discussion on climate resilience.",
-    "relatedConcepts": [
-      "Curation",
-      "Discovery",
-      "Programming",
-      "Generative AI",
-      "Readers' Advisory"
-    ]
+    "relatedConcepts": ["Curation", "Readers' Advisory"]
   },
   {
     "application": "Conversational Discovery",
-    "primaryArea": "Emerging Applications",
+    "primaryArea": "Discovery",
     "audience": "Patron",
     "aiType": "Generative AI",
-    "technologyTags": ["LLM", "Semantic Search", "RAG"],
+    "technologyTags": ["LLM", "RAG", "Semantic Search"],
     "maturity": "Emerging",
     "keyConcerns": ["Accuracy", "Transparency"],
-    "applicationDefinition": "A natural-language search tool that lets users ask questions instead of building keyword searches.",
+    "applicationDefinition": "A natural-language search tool that lets users ask questions instead of building keyword searches. It can translate plain-language requests into relevant catalog results and explain why items were returned. Good design should make the retrieval logic visible enough for users to trust and refine the search.",
     "libraryExample": "A patron asks, \"Which beginner gardening books cover container planting?\" and receives catalog results with short explanations.",
-    "relatedConcepts": [
-      "Discovery",
-      "Search",
-      "User Experience",
-      "Generative AI",
-      "Semantic Search"
-    ]
+    "relatedConcepts": ["Chatbots", "User Experience"]
   },
   {
     "application": "Agentic Research Assistant",
-    "primaryArea": "Emerging Applications",
+    "primaryArea": "Research Support",
     "audience": "Patron",
     "aiType": "Agentic AI",
     "technologyTags": ["AI Agents", "LLM", "RAG"],
     "maturity": "Experimental",
-    "keyConcerns": ["Accuracy", "Reliability"],
-    "applicationDefinition": "An AI system that can plan and carry out multi-step research tasks with limited human intervention.",
+    "keyConcerns": ["Accuracy", "Hallucinations", "Reliability"],
+    "applicationDefinition": "An AI system that can plan and carry out multi-step research tasks with limited human intervention. It may search, synthesize, compare sources, and iterate on the user's behalf, which makes it powerful but also risky. Strong guardrails, logging, and human oversight are necessary because errors can compound across steps.",
     "libraryExample": "A graduate student asks the system to identify major themes in recent AI-in-education literature.",
-    "relatedConcepts": [
-      "Research Support",
-      "Agents",
-      "Automation",
-      "Scholarly Communication",
-      "Generative AI"
-    ]
+    "relatedConcepts": ["Automation", "Scholarly Communication"]
   }
 ]

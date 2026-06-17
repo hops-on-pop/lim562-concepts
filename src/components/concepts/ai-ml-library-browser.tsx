@@ -7,7 +7,6 @@ import {
   Landmark,
   Layers3,
   type LucideIcon,
-  PanelRightOpen,
   ShieldAlert,
   Sparkles,
   X,
@@ -15,12 +14,14 @@ import {
 import {
   type MouseEvent,
   type ReactNode,
+  type RefObject,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react"
+import { createPortal } from "react-dom"
 
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
@@ -31,6 +32,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer"
 import definitionData from "@/data/definitions.json"
 import applicationsData from "@/data/library_ai_applications.json"
 import { getConceptTheme } from "@/lib/concept-themes"
@@ -146,6 +155,7 @@ export function AiMlLibraryBrowser() {
   const drawerRef = useRef<HTMLDivElement | null>(null)
   const filtersRef = useRef<HTMLDivElement | null>(null)
   const contentRef = useRef<HTMLDivElement | null>(null)
+  const popoverRef = useRef<HTMLDivElement | null>(null)
   const [selectedApplication, setSelectedApplication] =
     useState<Application | null>(null)
   const [draftFilters, setDraftFilters] = useState<FacetSelection>(() =>
@@ -163,6 +173,12 @@ export function AiMlLibraryBrowser() {
     setTermPopover(null)
   }, [])
 
+  const closeSelectedApplication = useCallback(() => {
+    setSelectedApplication(null)
+    closeTermDefinition()
+    setOpenFacet(null)
+  }, [closeTermDefinition])
+
   const filteredApplications = useMemo(
     () =>
       sortedApplications.filter((application) => {
@@ -177,13 +193,17 @@ export function AiMlLibraryBrowser() {
 
   useEffect(() => {
     function onPointerDown(event: PointerEvent) {
-      const target = event.target as Node | null
+      const target = event.target
 
-      if (
-        !target ||
-        drawerRef.current?.contains(target) ||
-        filtersRef.current?.contains(target)
-      ) {
+      if (!(target instanceof Node)) {
+        return
+      }
+
+      if (popoverRef.current?.contains(target)) {
+        return
+      }
+
+      if (target instanceof Element && target.closest("[data-term-chip]")) {
         return
       }
 
@@ -277,33 +297,25 @@ export function AiMlLibraryBrowser() {
       return
     }
 
-    const contentBox = contentRef.current?.getBoundingClientRect()
     const triggerBox = event.currentTarget.getBoundingClientRect()
-    const width = contentBox
-      ? Math.max(220, Math.min(320, contentBox.width - 24))
-      : 320
-    const leftOffset = contentBox
-      ? clamp(
-          triggerBox.left - contentBox.left,
-          12,
-          contentBox.width - width - 12,
-        )
-      : 12
+    const width = Math.max(220, Math.min(320, window.innerWidth - 24))
+    const left = clamp(triggerBox.left, 12, window.innerWidth - width - 12)
 
     setActiveTerm(term)
     setTermPopover({
-      left: leftOffset,
-      top: contentBox
-        ? triggerBox.bottom - contentBox.top + 10
-        : triggerBox.bottom + 10,
+      left,
+      top: triggerBox.bottom + 10,
       width,
     })
   }
 
   return (
     <ConceptExplorerShell
+      className="max-h-none overflow-visible"
       howItWorks="Stage any combination of filters, then apply them to narrow the list. Open one application at a time in the side drawer, and click any term chip to reveal its definition."
       slug="ai-ml-libraries"
+      contentClassName="overflow-visible"
+      scrollContent={false}
     >
       <div className="space-y-6">
         <section
@@ -357,10 +369,7 @@ export function AiMlLibraryBrowser() {
           </CardContent>
         </section>
 
-        <div
-          className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] lg:items-start"
-          ref={contentRef}
-        >
+        <div className="relative" ref={contentRef}>
           <section className="space-y-4">
             {filteredApplications.length > 0 ? (
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -395,31 +404,78 @@ export function AiMlLibraryBrowser() {
             )}
           </section>
 
-          <aside
-            aria-label="Application drawer"
-            className={cn(
-              theme.detailPanel,
-              "relative self-start overflow-visible lg:sticky lg:top-6",
-            )}
-            ref={drawerRef}
-          >
-            {displayedApplication ? (
-              <ApplicationDrawer
-                application={displayedApplication}
-                onTermClick={openTermDefinition}
-              />
-            ) : (
-              <EmptyDrawer />
-            )}
-          </aside>
+          {displayedApplication ? (
+            <Drawer
+              direction="right"
+              open={Boolean(displayedApplication)}
+              onOpenChange={(open) => {
+                if (!open) {
+                  closeSelectedApplication()
+                }
+              }}
+            >
+              <DrawerContent
+                className={cn(
+                  theme.detailPanel,
+                  "h-dvh max-h-dvh w-full max-w-none overflow-hidden rounded-none border-border/80 bg-[color-mix(in_srgb,var(--color-rose-50)_35%,white)] p-0 shadow-2xl data-[vaul-drawer-direction=right]:w-full data-[vaul-drawer-direction=right]:sm:max-w-none lg:data-[vaul-drawer-direction=right]:w-[40vw] lg:data-[vaul-drawer-direction=right]:max-w-none lg:rounded-l-3xl",
+                )}
+              >
+                <div className="flex h-full min-h-0 flex-col" ref={drawerRef}>
+                  <DrawerHeader className="flex flex-row items-center justify-between gap-3 border-b border-border/60 bg-background/95 px-5 py-4 backdrop-blur sticky top-0 z-10">
+                    <DrawerTitle className="min-w-0 flex-1 text-left">
+                      <div className="text-xl font-semibold tracking-normal text-balance">
+                        {displayedApplication.application}
+                      </div>
+                      <div className="flex max-w-[90%] justify-between">
+                        <p className="text-sm font-medium text-muted-foreground uppercase">
+                          {displayedApplication.primaryArea}
+                        </p>
+                        <Badge
+                          className={cn(
+                            "relative z-20",
+                            getMaturityMeta(displayedApplication.maturity).chip,
+                          )}
+                        >
+                          {displayedApplication.maturity}
+                        </Badge>
+                      </div>
+                    </DrawerTitle>
+                    <DrawerClose asChild className="shrink-0">
+                      <button
+                        aria-label="Close application drawer"
+                        className={buttonVariants({
+                          size: "icon-xs",
+                          variant: "ghost",
+                        })}
+                        type="button"
+                      >
+                        <X />
+                      </button>
+                    </DrawerClose>
+                  </DrawerHeader>
 
-          {activeDefinition && termPopover ? (
-            <TermPopover
-              definition={activeDefinition}
-              position={termPopover}
-              onClose={closeTermDefinition}
-            />
+                  <div className="min-h-0 flex-1 overflow-y-auto p-5">
+                    <ApplicationDrawer
+                      application={displayedApplication}
+                      onTermClick={openTermDefinition}
+                    />
+                  </div>
+                </div>
+              </DrawerContent>
+            </Drawer>
           ) : null}
+
+          {activeDefinition && termPopover
+            ? createPortal(
+                <TermPopover
+                  definition={activeDefinition}
+                  popoverRef={popoverRef}
+                  position={termPopover}
+                  onClose={closeTermDefinition}
+                />,
+                document.body,
+              )
+            : null}
         </div>
       </div>
     </ConceptExplorerShell>
@@ -600,17 +656,17 @@ function ApplicationCard({
           <CardDescription className="text-sm leading-6 text-foreground">
             {application.applicationDefinition}
           </CardDescription>
-          <p className="text-xs leading-6 text-muted-foreground">
-            <span className="font-semibold text-foreground">Type:</span>{" "}
-            <button
-              className="relative z-20 font-medium text-foreground underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
-              onClick={(event) => onTermClick(application.aiType, event)}
-              type="button"
-            >
-              {application.aiType}
-            </button>
-          </p>
-          <div className="mt-auto flex justify-end">
+          <div className="mt-auto flex justify-between items-end">
+            <p className="text-sm leading-6 text-muted-foreground">
+              <button
+                className="relative z-20 font-medium text-red-800 underline-offset-4 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+                onClick={(event) => onTermClick(application.aiType, event)}
+                type="button"
+              >
+                {application.aiType}
+              </button>
+            </p>
+
             <Badge
               className={cn(
                 "relative z-20",
@@ -634,36 +690,15 @@ function ApplicationDrawer({
   onTermClick: (term: string, event: MouseEvent<HTMLButtonElement>) => void
 }) {
   return (
-    <div className="space-y-5">
-      <div className="space-y-2">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0 space-y-2">
-            <h3 className="text-xl font-semibold tracking-normal text-balance">
-              {application.application}
-            </h3>
-            <p className="text-sm font-medium text-muted-foreground">
-              {application.primaryArea}
-            </p>
-          </div>
-          <span
-            className={cn(
-              "inline-flex h-6 shrink-0 items-center rounded-4xl border px-2.5 py-0.5 text-xs font-medium",
-              getMaturityMeta(application.maturity).chip,
-            )}
-          >
-            {application.maturity}
-          </span>
-        </div>
-        <p className="text-sm leading-6 text-muted-foreground">
+    <div className="space-y-5 ">
+      <div className="flex items-start justify-between">
+        <p className="text-base leading-6 text-foreground">
           {application.applicationDefinition}
         </p>
       </div>
 
-      <DrawerSection
-        boxClassName="rounded-2xl bg-muted/40 p-4"
-        label="Library Example"
-      >
-        <p className="text-sm leading-6 text-muted-foreground">
+      <DrawerSection boxClassName="rounded-2xl" label="Library Example">
+        <p className="text-sm leading-6 text-foreground">
           {application.libraryExample}
         </p>
       </DrawerSection>
@@ -734,6 +769,7 @@ function TermButton({
         }),
         termChipClassName,
       )}
+      data-term-chip=""
       onClick={(event) => onTermClick(term, event)}
       type="button"
     >
@@ -764,33 +800,21 @@ function TermGroup({
   )
 }
 
-function EmptyDrawer() {
-  return (
-    <div className="space-y-4">
-      <div>
-        <h3 className="text-xl font-semibold tracking-normal text-balance">
-          Application Details
-        </h3>
-        <p className="mt-2 text-sm leading-6 text-muted-foreground">
-          Select an application card to view more details.
-        </p>
-      </div>
-    </div>
-  )
-}
-
 function TermPopover({
   definition,
+  popoverRef,
   position,
   onClose,
 }: {
   definition: DefinitionEntry
+  popoverRef: RefObject<HTMLDivElement | null>
   position: TermPopoverState
   onClose: () => void
 }) {
   return (
     <div
-      className="absolute z-20"
+      ref={popoverRef}
+      className="fixed z-100"
       style={{
         left: position.left,
         top: position.top,

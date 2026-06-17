@@ -1,112 +1,37 @@
 [
   {
-    "term": "Established",
-    "definition": "Widely deployed and well understood in libraries or adjacent industries",
-    "type": "maturity"
-  },
-  {
-    "term": "Emerging",
-    "definition": "Increasing adoption but still evolving in practice",
-    "type": "maturity"
-  },
-  {
-    "term": "Experimental",
-    "definition": "Limited deployment, pilot projects, or active research area",
-    "type": "maturity"
-  },
-  {
-    "term": "Accuracy",
-    "definition": "AI may produce incorrect, incomplete, or misleading results.",
-    "type": "key-concern"
-  },
-  {
-    "term": "Hallucinations",
-    "definition": "AI may fabricate facts, sources, citations, or metadata.",
-    "type": "key-concern"
-  },
-  {
-    "term": "Bias",
-    "definition": "AI may reinforce historical, cultural, demographic, or algorithmic biases.",
-    "type": "key-concern"
-  },
-  {
-    "term": "Privacy",
-    "definition": "Patron, staff, or institutional data may be collected, analyzed, or exposed.",
-    "type": "key-concern"
-  },
-  {
-    "term": "Transparency",
-    "definition": "Users may not understand how recommendations or decisions were produced.",
-    "type": "key-concern"
+    "term": "Access",
+    "definition": "The ability for people to find, reach, and use library resources or services.",
+    "type": "concept"
   },
   {
     "term": "Accessibility",
-    "definition": "The extent to which library services, interfaces, and outputs can be used by people with disabilities and diverse access needs.",
-    "type": "key-concern"
-  },
-  {
-    "term": "Copyright",
-    "definition": "Questions about ownership, licensing, training data, or reuse of content.",
-    "type": "key-concern"
-  },
-  {
-    "term": "Representation",
-    "definition": "Communities, viewpoints, or identities may be omitted or misrepresented.",
+    "definition": "The extent to which services, interfaces, and outputs can be used by people with disabilities and diverse access needs.",
     "type": "key-concern"
   },
   {
     "term": "Accountability",
-    "definition": "Unclear responsibility for AI-assisted decisions or outputs.",
+    "definition": "The responsibility for AI-assisted decisions or outputs.",
     "type": "key-concern"
   },
   {
-    "term": "Reliability",
-    "definition": "Performance may be inconsistent across contexts or over time.",
+    "term": "Accuracy",
+    "definition": "The degree to which AI outputs are correct, complete, and reliable.",
     "type": "key-concern"
   },
   {
-    "term": "Data Quality",
-    "definition": "Poor, incomplete, outdated, or inconsistent input data may affect outcomes.",
-    "type": "key-concern"
+    "term": "Administration",
+    "definition": "The management of policies, staffing, budgets, and day-to-day operations.",
+    "type": "concept"
   },
   {
-    "term": "Human Oversight",
-    "definition": "Results require professional review and should not be accepted automatically.",
-    "type": "key-concern"
-  },
-  {
-    "term": "Explainability",
-    "definition": "Users may need justification or reasoning behind recommendations.",
-    "type": "key-concern"
-  },
-  {
-    "term": "Equity & Inclusion",
-    "definition": "Services may not benefit all users equally.",
-    "type": "key-concern"
-  },
-  {
-    "term": "Legal & Compliance",
-    "definition": "Potential legal, regulatory, policy, or ethical compliance issues.",
-    "type": "key-concern"
-  },
-  {
-    "term": "LLM",
-    "definition": "A Large Language Model trained on vast amounts of text to understand and generate human language, answer questions, summarize information, and perform other language-related tasks.",
+    "term": "Agent Workflows",
+    "definition": "Structured processes in which AI agents execute sequences of tasks, often combining reasoning, retrieval, and external tools.",
     "type": "technology"
   },
   {
-    "term": "Generative AI",
-    "definition": "Technology that creates new content such as text, images, audio, code, metadata, or summaries based on patterns learned from training data.",
-    "type": "technology"
-  },
-  {
-    "term": "Multimodal AI",
-    "definition": "AI systems capable of processing and generating multiple forms of content, such as text, images, audio, and video.",
-    "type": "technology"
-  },
-  {
-    "term": "Prompt Engineering",
-    "definition": "The practice of designing and refining prompts to improve the quality, accuracy, and usefulness of AI-generated outputs.",
+    "term": "Agentic AI",
+    "definition": "AI that can plan and choose actions, often using tools, with a degree of autonomy.",
     "type": "technology"
   },
   {
@@ -115,203 +40,8 @@
     "type": "technology"
   },
   {
-    "term": "Agent Workflows",
-    "definition": "Structured processes in which AI agents execute sequences of tasks, often combining reasoning, retrieval, and external tools.",
-    "type": "technology"
-  },
-  {
-    "term": "RAG",
-    "definition": "Retrieval-Augmented Generation combines information retrieval with generative AI by retrieving relevant documents before generating a response.",
-    "type": "technology"
-  },
-  {
-    "term": "Semantic Search",
-    "definition": "A search approach that retrieves information based on meaning, context, and user intent rather than exact keyword matches.",
-    "type": "technology"
-  },
-  {
-    "term": "Vector Search",
-    "definition": "A search technique that finds similar content by comparing vector representations of data rather than matching exact text.",
-    "type": "technology"
-  },
-  {
-    "term": "Embeddings",
-    "definition": "Numerical representations of text, images, or other content that capture meaning and allow similarity comparisons.",
-    "type": "technology"
-  },
-  {
-    "term": "Knowledge Graphs",
-    "definition": "Structured networks of entities and relationships that represent knowledge and enable discovery, reasoning, and linked data applications.",
-    "type": "technology"
-  },
-  {
-    "term": "Linked Data",
-    "definition": "A method of publishing structured data using shared identifiers and relationships so that information can be connected across systems.",
-    "type": "technology"
-  },
-  {
-    "term": "Query Expansion",
-    "definition": "The process of automatically adding related terms, synonyms, or concepts to a search query to improve retrieval results.",
-    "type": "technology"
-  },
-  {
-    "term": "NLP",
-    "definition": "Natural Language Processing is a field of AI focused on enabling computers to understand, analyze, generate, and interact with human language.",
-    "type": "technology"
-  },
-  {
-    "term": "Natural Language Processing",
-    "definition": "A field of AI focused on enabling computers to analyze, interpret, generate, and interact with human language.",
-    "type": "technology"
-  },
-  {
-    "term": "Named Entity Recognition",
-    "definition": "A technique that identifies and extracts entities such as people, organizations, places, dates, and events from text.",
-    "type": "technology"
-  },
-  {
-    "term": "Text Classification",
-    "definition": "The process of assigning predefined categories or labels to documents, records, or other text-based content.",
-    "type": "technology"
-  },
-  {
-    "term": "Topic Modeling",
-    "definition": "A method for identifying themes or topics that appear across a collection of documents.",
-    "type": "technology"
-  },
-  {
-    "term": "Sentiment Analysis",
-    "definition": "The process of analyzing text to determine opinions, emotions, attitudes, or sentiment expressed by the author.",
-    "type": "technology"
-  },
-  {
-    "term": "Machine Translation",
-    "definition": "Technology that automatically translates text or speech from one language to another.",
-    "type": "technology"
-  },
-  {
-    "term": "Text Summarization",
-    "definition": "The process of generating shorter versions of longer documents while preserving key information and meaning.",
-    "type": "technology"
-  },
-  {
-    "term": "Metadata Extraction",
-    "definition": "The automated identification and collection of descriptive information from digital resources.",
-    "type": "technology"
-  },
-  {
-    "term": "Metadata Generation",
-    "definition": "The automated creation of descriptive metadata such as titles, keywords, abstracts, and subject terms.",
-    "type": "technology"
-  },
-  {
-    "term": "Entity Resolution",
-    "definition": "The process of determining when different records or references represent the same real-world entity.",
-    "type": "technology"
-  },
-  {
-    "term": "Classification",
-    "definition": "The assignment of resources, documents, or records into categories based on their characteristics or content.",
-    "type": "technology"
-  },
-  {
-    "term": "Deduplication",
-    "definition": "The identification and removal or consolidation of duplicate records within a dataset or catalog.",
-    "type": "technology"
-  },
-  {
-    "term": "OCR",
-    "definition": "Optical Character Recognition converts images of printed text into machine-readable and searchable text.",
-    "type": "technology"
-  },
-  {
-    "term": "Computer Vision",
-    "definition": "A field of AI that enables computers to interpret, analyze, and understand visual information from images and video.",
-    "type": "technology"
-  },
-  {
-    "term": "Image Recognition",
-    "definition": "Technology that identifies objects, people, locations, or concepts within images.",
-    "type": "technology"
-  },
-  {
-    "term": "Handwriting Recognition",
-    "definition": "Technology that converts handwritten text into machine-readable text.",
-    "type": "technology"
-  },
-  {
-    "term": "Object Detection",
-    "definition": "A computer vision technique that identifies and locates specific objects within an image or video.",
-    "type": "technology"
-  },
-  {
-    "term": "Speech Recognition",
-    "definition": "Technology that converts spoken language into text.",
-    "type": "technology"
-  },
-  {
-    "term": "Speech Synthesis",
-    "definition": "Technology that generates spoken language from text.",
-    "type": "technology"
-  },
-  {
-    "term": "Audio Transcription",
-    "definition": "The automated conversion of spoken audio into written text.",
-    "type": "technology"
-  },
-  {
-    "term": "Text-to-Speech",
-    "definition": "Technology that reads written text aloud using synthetic speech.",
-    "type": "technology"
-  },
-  {
-    "term": "Recommendation Systems",
-    "definition": "Algorithms that suggest relevant resources, products, services, or content based on user behavior or item characteristics.",
-    "type": "technology"
-  },
-  {
-    "term": "Predictive Analytics",
-    "definition": "The use of historical data and machine learning models to forecast future events, behaviors, or trends.",
-    "type": "technology"
-  },
-  {
-    "term": "Forecasting",
-    "definition": "A predictive technique used to estimate future demand, usage, or outcomes based on historical patterns.",
-    "type": "technology"
-  },
-  {
-    "term": "Data Mining",
-    "definition": "The process of discovering patterns, relationships, and insights within large datasets.",
-    "type": "technology"
-  },
-  {
-    "term": "Pattern Recognition",
-    "definition": "The ability of an AI system to identify recurring structures, relationships, or trends within data.",
-    "type": "technology"
-  },
-  {
-    "term": "Access",
-    "definition": "The ability for people to find, reach, and use library resources or services.",
-    "type": "concept"
-  },
-  {
-    "term": "Administration",
-    "definition": "The management of policies, staffing, budgets, and day-to-day operations.",
-    "type": "concept"
-  },
-  {
-    "term": "Agentic AI",
-    "definition": "AI that can plan and choose actions, often using tools, with a degree of autonomy.",
-    "type": "technology"
-  },
-  {
-    "term": "Agents",
-    "definition": "Autonomous or semi-autonomous software components that act on behalf of a user or workflow.",
-    "type": "technology"
-  },
-  {
     "term": "Analytics",
-    "definition": "Using data to understand usage, patterns, and outcomes.",
+    "definition": "The use of data to understand usage, patterns, and outcomes.",
     "type": "concept"
   },
   {
@@ -325,9 +55,19 @@
     "type": "concept"
   },
   {
+    "term": "Audio Transcription",
+    "definition": "The automated conversion of spoken audio into written text.",
+    "type": "technology"
+  },
+  {
     "term": "Automation",
     "definition": "Using systems to perform routine tasks with limited manual intervention.",
     "type": "concept"
+  },
+  {
+    "term": "Bias",
+    "definition": "Systematic skew in data, models, or outputs that can reflect or amplify existing inequities.",
+    "type": "key-concern"
   },
   {
     "term": "Cataloging",
@@ -346,8 +86,13 @@
   },
   {
     "term": "Citations",
-    "definition": "Standard references that identify a source and where it was published.",
+    "definition": "Standard references that identify a source and where it was published or located.",
     "type": "concept"
+  },
+  {
+    "term": "Classification",
+    "definition": "The assignment of resources, documents, or records into categories based on their characteristics or content.",
+    "type": "technology"
   },
   {
     "term": "Collection Development",
@@ -360,8 +105,18 @@
     "type": "concept"
   },
   {
+    "term": "Computer Vision",
+    "definition": "A field of AI that enables computers to interpret, analyze, and understand visual information from images and video.",
+    "type": "technology"
+  },
+  {
+    "term": "Copyright",
+    "definition": "The rights and restrictions governing ownership, licensing, and reuse of content.",
+    "type": "key-concern"
+  },
+  {
     "term": "Curation",
-    "definition": "Selecting, organizing, and shaping content for a purpose or audience.",
+    "definition": "Selecting and shaping content for a specific purpose or audience.",
     "type": "concept"
   },
   {
@@ -375,13 +130,23 @@
     "type": "concept"
   },
   {
-    "term": "Decision Support",
-    "definition": "Tools that help people make informed choices without replacing judgment.",
-    "type": "concept"
+    "term": "Data Mining",
+    "definition": "The process of finding patterns, relationships, and insights in large datasets.",
+    "type": "technology"
   },
   {
-    "term": "Description",
-    "definition": "Text or metadata that explains what a resource is about.",
+    "term": "Data Quality",
+    "definition": "The completeness, consistency, currency, and overall fitness of data for use.",
+    "type": "key-concern"
+  },
+  {
+    "term": "Deduplication",
+    "definition": "The identification and consolidation of duplicate records within a dataset or catalog.",
+    "type": "technology"
+  },
+  {
+    "term": "DEIA",
+    "definition": "A framework for diversity, equity, inclusion, and accessibility in services and institutions.",
     "type": "concept"
   },
   {
@@ -400,14 +165,19 @@
     "type": "concept"
   },
   {
-    "term": "Diversity",
-    "definition": "The presence of different perspectives, identities, communities, or materials.",
-    "type": "concept"
-  },
-  {
     "term": "Documentation",
     "definition": "Written guidance that explains a system, process, policy, or resource.",
     "type": "concept"
+  },
+  {
+    "term": "Embeddings",
+    "definition": "Numeric representations of content that capture meaning and support similarity comparisons.",
+    "type": "technology"
+  },
+  {
+    "term": "Emerging",
+    "definition": "Increasing adoption but still evolving in practice.",
+    "type": "maturity"
   },
   {
     "term": "Emerging Applications",
@@ -415,14 +185,39 @@
     "type": "concept"
   },
   {
-    "term": "Equity",
-    "definition": "Fair access, treatment, and outcomes across different user groups.",
-    "type": "concept"
+    "term": "Entity Resolution",
+    "definition": "The process of determining when different records or references represent the same real-world entity.",
+    "type": "technology"
+  },
+  {
+    "term": "Equity & Inclusion",
+    "definition": "Unequal access to benefits, participation, or outcomes across user groups.",
+    "type": "key-concern"
+  },
+  {
+    "term": "Established",
+    "definition": "Widely deployed and well understood in libraries or adjacent industries.",
+    "type": "maturity"
+  },
+  {
+    "term": "Experimental",
+    "definition": "Limited deployment, pilot projects, or an active research area.",
+    "type": "maturity"
+  },
+  {
+    "term": "Explainability",
+    "definition": "The ability to explain how a recommendation or decision was produced.",
+    "type": "key-concern"
   },
   {
     "term": "Feedback",
-    "definition": "Responses from users or staff that help improve a service.",
+    "definition": "Responses from users or staff that help improve a service or system.",
     "type": "concept"
+  },
+  {
+    "term": "Forecasting",
+    "definition": "A predictive technique used to estimate future demand, usage, or outcomes based on historical patterns.",
+    "type": "technology"
   },
   {
     "term": "Funding",
@@ -430,14 +225,34 @@
     "type": "concept"
   },
   {
+    "term": "Generative AI",
+    "definition": "AI that creates new content such as text, images, audio, code, metadata, or summaries.",
+    "type": "technology"
+  },
+  {
+    "term": "Hallucinations",
+    "definition": "Incorrect or fabricated facts, sources, citations, or metadata produced by AI.",
+    "type": "key-concern"
+  },
+  {
+    "term": "Handwriting Recognition",
+    "definition": "Technology that converts handwritten text into machine-readable text.",
+    "type": "technology"
+  },
+  {
+    "term": "Human Oversight",
+    "definition": "Human review and judgment applied to AI outputs before use.",
+    "type": "key-concern"
+  },
+  {
     "term": "Image Analysis",
     "definition": "The examination of images to identify features, objects, or patterns.",
     "type": "concept"
   },
   {
-    "term": "Inclusion",
-    "definition": "Practices that make services and collections welcoming and usable for more people.",
-    "type": "concept"
+    "term": "Image Recognition",
+    "definition": "Technology that identifies objects, people, locations, or concepts within images.",
+    "type": "technology"
   },
   {
     "term": "Information Literacy",
@@ -450,9 +265,19 @@
     "type": "concept"
   },
   {
+    "term": "Knowledge Graphs",
+    "definition": "Structured networks of entities and relationships that represent knowledge and enable discovery, reasoning, and linked data applications.",
+    "type": "technology"
+  },
+  {
     "term": "Learning Support",
     "definition": "Help that assists teaching, training, or independent learning.",
     "type": "concept"
+  },
+  {
+    "term": "Legal & Compliance",
+    "definition": "Potential legal, regulatory, policy, or ethical compliance issues.",
+    "type": "key-concern"
   },
   {
     "term": "Library Standards",
@@ -460,18 +285,23 @@
     "type": "concept"
   },
   {
-    "term": "ML",
-    "definition": "Machine Learning; systems that learn patterns from data to make predictions or decisions.",
+    "term": "Linked Data",
+    "definition": "A method of publishing structured data using shared identifiers and relationships so that information can be connected across systems.",
     "type": "technology"
   },
   {
-    "term": "ML / NLP",
-    "definition": "A combined label for applications that use both machine learning and natural language processing.",
+    "term": "LLM",
+    "definition": "A large language model trained on text to understand and generate human language.",
     "type": "technology"
   },
   {
     "term": "Machine Learning",
-    "definition": "A branch of AI where systems learn patterns from data rather than explicit rules.",
+    "definition": "A branch of AI in which systems learn patterns from data rather than explicit rules.",
+    "type": "technology"
+  },
+  {
+    "term": "Machine Translation",
+    "definition": "Technology that translates text or speech from one language to another.",
     "type": "technology"
   },
   {
@@ -485,13 +315,68 @@
     "type": "concept"
   },
   {
+    "term": "Metadata Extraction",
+    "definition": "The automated identification and collection of descriptive information from digital resources.",
+    "type": "technology"
+  },
+  {
+    "term": "Metadata Generation",
+    "definition": "The automated creation of descriptive metadata such as titles, keywords, abstracts, and subject terms.",
+    "type": "technology"
+  },
+  {
+    "term": "ML",
+    "definition": "Abbreviation for machine learning.",
+    "type": "technology"
+  },
+  {
+    "term": "ML / NLP",
+    "definition": "A combined label for applications that use both machine learning and natural language processing.",
+    "type": "technology"
+  },
+  {
     "term": "Multilingual Services",
     "definition": "Services designed to support users across multiple languages.",
     "type": "concept"
   },
   {
+    "term": "Multimodal AI",
+    "definition": "AI systems capable of processing and generating multiple forms of content, such as text, images, audio, and video.",
+    "type": "technology"
+  },
+  {
+    "term": "Named Entity Recognition",
+    "definition": "A technique that identifies and extracts entities such as people, organizations, places, dates, and events from text.",
+    "type": "technology"
+  },
+  {
+    "term": "Natural Language Processing",
+    "definition": "A field of AI focused on understanding, analyzing, generating, and interacting with human language.",
+    "type": "technology"
+  },
+  {
+    "term": "NLP",
+    "definition": "Abbreviation for natural language processing.",
+    "type": "technology"
+  },
+  {
     "term": "NLP / Generative AI",
     "definition": "A combined label for language applications that mix NLP methods with generative models.",
+    "type": "technology"
+  },
+  {
+    "term": "Object Detection",
+    "definition": "A computer vision technique that identifies and locates specific objects within an image or video.",
+    "type": "technology"
+  },
+  {
+    "term": "OCR",
+    "definition": "Technology that converts images of printed text into machine-readable text.",
+    "type": "technology"
+  },
+  {
+    "term": "Pattern Recognition",
+    "definition": "The ability of an AI system to identify recurring structures, relationships, or trends within data.",
     "type": "technology"
   },
   {
@@ -510,14 +395,29 @@
     "type": "concept"
   },
   {
+    "term": "Predictive Analytics",
+    "definition": "The use of historical data and machine learning models to forecast future events, behaviors, or trends.",
+    "type": "technology"
+  },
+  {
+    "term": "Privacy",
+    "definition": "The protection of patron, staff, or institutional data from unnecessary collection, exposure, or misuse.",
+    "type": "key-concern"
+  },
+  {
     "term": "Productivity",
     "definition": "How much useful work can be completed with the available time and tools.",
     "type": "concept"
   },
   {
     "term": "Programming",
-    "definition": "Library events, workshops, exhibits, or activities planned for a community or learning goal.",
+    "definition": "Library events, workshops, exhibits, or activities designed for a community or learning goal.",
     "type": "concept"
+  },
+  {
+    "term": "Prompt Engineering",
+    "definition": "The practice of designing and refining prompts to improve AI outputs.",
+    "type": "technology"
   },
   {
     "term": "Purchasing",
@@ -528,6 +428,16 @@
     "term": "Quality Control",
     "definition": "Review steps that catch errors, inconsistencies, or defects.",
     "type": "concept"
+  },
+  {
+    "term": "Query Expansion",
+    "definition": "The process of adding related terms, synonyms, or concepts to a search query to improve retrieval.",
+    "type": "technology"
+  },
+  {
+    "term": "RAG",
+    "definition": "Retrieval-augmented generation combines retrieval with generation by using relevant documents before answering.",
+    "type": "technology"
   },
   {
     "term": "Readers' Advisory",
@@ -545,6 +455,11 @@
     "type": "concept"
   },
   {
+    "term": "Recommendation Systems",
+    "definition": "Algorithms that suggest relevant resources, products, services, or content based on user behavior or item characteristics.",
+    "type": "technology"
+  },
+  {
     "term": "Recommendations",
     "definition": "Suggestions for resources, actions, or content based on some criteria.",
     "type": "concept"
@@ -555,6 +470,11 @@
     "type": "concept"
   },
   {
+    "term": "Reliability",
+    "definition": "The consistency of a system's performance across contexts and over time.",
+    "type": "key-concern"
+  },
+  {
     "term": "Reporting",
     "definition": "The production of summaries or outputs that communicate data or activity.",
     "type": "concept"
@@ -563,6 +483,11 @@
     "term": "Repositories",
     "definition": "Systems that store and provide access to digital scholarly or institutional content.",
     "type": "concept"
+  },
+  {
+    "term": "Representation",
+    "definition": "The presence and accuracy of communities, viewpoints, or identities in a system or dataset.",
+    "type": "key-concern"
   },
   {
     "term": "Research Data",
@@ -586,7 +511,7 @@
   },
   {
     "term": "Search",
-    "definition": "The act of looking for information or the system that supports that task.",
+    "definition": "The act of looking for information, or the system that supports that task.",
     "type": "concept"
   },
   {
@@ -595,14 +520,54 @@
     "type": "concept"
   },
   {
+    "term": "Semantic Search",
+    "definition": "A search approach that retrieves information based on meaning, context, and user intent rather than exact keyword matches.",
+    "type": "technology"
+  },
+  {
+    "term": "Sentiment Analysis",
+    "definition": "The process of analyzing text to identify opinions, emotions, or attitudes.",
+    "type": "technology"
+  },
+  {
     "term": "Speech AI",
     "definition": "AI systems that work with spoken language, including recognition, transcription, and synthesis.",
+    "type": "technology"
+  },
+  {
+    "term": "Speech Recognition",
+    "definition": "Technology that converts spoken language into text.",
+    "type": "technology"
+  },
+  {
+    "term": "Speech Synthesis",
+    "definition": "Technology that generates spoken language from text.",
     "type": "technology"
   },
   {
     "term": "Statistics",
     "definition": "Numerical information or the methods used to analyze it.",
     "type": "concept"
+  },
+  {
+    "term": "Text Classification",
+    "definition": "The process of assigning predefined categories or labels to documents, records, or other text-based content.",
+    "type": "technology"
+  },
+  {
+    "term": "Text Summarization",
+    "definition": "The process of generating shorter versions of longer documents while preserving key information and meaning.",
+    "type": "technology"
+  },
+  {
+    "term": "Text-to-Speech",
+    "definition": "Technology that reads written text aloud using synthetic speech.",
+    "type": "technology"
+  },
+  {
+    "term": "Topic Modeling",
+    "definition": "A method for identifying themes or topics that appear across a collection of documents.",
+    "type": "technology"
   },
   {
     "term": "Transcription",
@@ -613,6 +578,11 @@
     "term": "Translation",
     "definition": "Converting text or speech from one language to another.",
     "type": "concept"
+  },
+  {
+    "term": "Transparency",
+    "definition": "The extent to which users can understand how a recommendation or decision was produced.",
+    "type": "key-concern"
   },
   {
     "term": "Usage Data",
@@ -628,6 +598,11 @@
     "term": "User Services",
     "definition": "Direct support services that help patrons use the library.",
     "type": "concept"
+  },
+  {
+    "term": "Vector Search",
+    "definition": "A search technique that finds similar content by comparing vector representations of data rather than matching exact text.",
+    "type": "technology"
   },
   {
     "term": "Writing Support",
