@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   BookOpen,
@@ -13,28 +13,28 @@ import {
   Shapes,
   SquareTerminal,
   Tag,
-} from "lucide-react";
-import { useState } from "react";
+} from "lucide-react"
+import { useState } from "react"
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { getConceptTheme } from "@/lib/concept-themes";
-import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { getConceptTheme } from "@/lib/concept-themes"
+import { cn } from "@/lib/utils"
 
-import { ConceptExplorerShell } from "./concept-explorer-shell";
+import { ConceptExplorerShell } from "./concept-explorer-shell"
 
-type StageId = "metadata" | "dublin-core" | "marc" | "bibframe" | "linked-data";
+type StageId = "metadata" | "dublin-core" | "marc" | "bibframe" | "linked-data"
 
 type Stage = {
-  id: StageId;
-  label: string;
-  shortLabel: string;
-  icon: LucideIcon;
-  description: string;
-  snippetLabel: string;
-  snippet: string[];
-  use: string;
-};
+  id: StageId
+  label: string
+  shortLabel: string
+  icon: LucideIcon
+  description: string
+  snippetLabel: string
+  snippet: string[]
+  use: string
+}
 
 const resourceFacts = [
   { label: "Title", value: "Riverside Community Cookbook" },
@@ -42,7 +42,7 @@ const resourceFacts = [
   { label: "Published", value: "Riverside, 1984" },
   { label: "Subjects", value: "Community cookbooks; Local history" },
   { label: "Format", value: "Print book" },
-];
+]
 
 const dublinCoreElements = [
   { label: "dc:title", value: "Riverside Community Cookbook" },
@@ -50,7 +50,7 @@ const dublinCoreElements = [
   { label: "dc:date", value: "1984" },
   { label: "dc:subject", value: "Community cookbooks; Local history" },
   { label: "dc:type", value: "Text" },
-];
+]
 
 const bibframeEntities = [
   {
@@ -78,7 +78,7 @@ const bibframeEntities = [
     value: "Community cookbooks",
     detail: "what the work is about",
   },
-];
+]
 
 const linkedDataStatements = [
   {
@@ -96,7 +96,7 @@ const linkedDataStatements = [
     predicate: "bf:subject",
     object: "id.loc.gov/authorities/subjects/sh85031810",
   },
-];
+]
 
 const stages: Stage[] = [
   {
@@ -167,26 +167,26 @@ const stages: Stage[] = [
     shortLabel: "Linked data",
     icon: Network,
     description:
-      "Linked data gives entities stable identifiers and expresses relationships as statements that other systems can connect to, reuse, and interpret.",
+      "Linked data is an approach to organizing metadata that uses unique identifiers and explicit relationships to connect information within a system and across external systems, making data more discoverable, reusable, and interoperable.",
     snippetLabel: "RDF-like statements",
     snippet: [
       "lib:work/river-cookbook bf:subject id.loc.gov/.../sh85031810",
       "lib:instance/river-cookbook-1984 bf:instanceOf lib:work/river-cookbook",
       "lib:agent/rpl-friends owl:sameAs wikidata:Q-local-example",
     ],
-    use: "Good for connecting local description to shared identifiers, authority data, and other web-readable datasets.",
+    use: "    Linked data enables library resources, authors, subjects, and organizations to be connected and shared through machine-readable relationships",
   },
-];
+]
 
-const theme = getConceptTheme("metadata-linked-data");
+const theme = getConceptTheme("metadata-linked-data")
 
 export function MetadataLinkedDataExplorer() {
-  const [active, setActive] = useState(0);
-  const stage = stages[active];
-  const StageIcon = stage.icon;
+  const [active, setActive] = useState(0)
+  const stage = stages[active]
+  const StageIcon = stage.icon
 
   function goTo(index: number) {
-    setActive(index);
+    setActive(index)
   }
 
   return (
@@ -198,8 +198,8 @@ export function MetadataLinkedDataExplorer() {
         <div className="flex min-w-0 flex-col gap-4">
           <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-5">
             {stages.map((item, index) => {
-              const Icon = item.icon;
-              const isActive = index === active;
+              const Icon = item.icon
+              const isActive = index === active
 
               return (
                 <Button
@@ -216,7 +216,7 @@ export function MetadataLinkedDataExplorer() {
                   <Icon className="size-4 shrink-0" />
                   <span>{item.shortLabel}</span>
                 </Button>
-              );
+              )
             })}
           </div>
 
@@ -271,7 +271,7 @@ export function MetadataLinkedDataExplorer() {
         </aside>
       </div>
     </ConceptExplorerShell>
-  );
+  )
 }
 
 function StageVisual({ stageId }: { stageId: StageId }) {
@@ -296,7 +296,7 @@ function StageVisual({ stageId }: { stageId: StageId }) {
           ))}
         </dl>
       </section>
-    );
+    )
   }
 
   if (stageId === "marc") {
@@ -327,7 +327,7 @@ function StageVisual({ stageId }: { stageId: StageId }) {
           ))}
         </div>
       </section>
-    );
+    )
   }
 
   if (stageId === "dublin-core") {
@@ -351,7 +351,7 @@ function StageVisual({ stageId }: { stageId: StageId }) {
           ))}
         </div>
       </section>
-    );
+    )
   }
 
   if (stageId === "bibframe") {
@@ -378,7 +378,7 @@ function StageVisual({ stageId }: { stageId: StageId }) {
           ))}
         </div>
       </section>
-    );
+    )
   }
 
   return (
@@ -406,20 +406,20 @@ function StageVisual({ stageId }: { stageId: StageId }) {
         ))}
       </div>
     </section>
-  );
+  )
 }
 
 function GraphToken({
   icon: Icon,
   label,
 }: {
-  icon: LucideIcon;
-  label: string;
+  icon: LucideIcon
+  label: string
 }) {
   return (
     <span className="flex min-w-0 items-center gap-2 rounded-md bg-white px-2 py-1.5 text-xs ring-1 ring-border">
       <Icon className={cn("size-3.5 shrink-0", theme.accentMuted)} />
       <span className="min-w-0 break-words font-mono">{label}</span>
     </span>
-  );
+  )
 }

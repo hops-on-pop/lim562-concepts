@@ -35,10 +35,6 @@ export default function Home() {
                 Concept topics
               </h2>
             </div>
-            <Badge className="w-fit gap-1.5" variant="secondary">
-              <Layers3 className="size-3.5" />
-              {concepts.length} topics
-            </Badge>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">

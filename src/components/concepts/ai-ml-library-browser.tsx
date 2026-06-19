@@ -707,7 +707,7 @@ function ApplicationDrawer({
         <TermButton onTermClick={onTermClick} term={application.aiType} />
       </DrawerSection>
 
-      <DrawerSection label="What to watch" icon={ShieldAlert}>
+      <DrawerSection label="Key concerns">
         <ul className="flex flex-wrap gap-2">
           {application.keyConcerns.map((concern) => (
             <li key={concern}>
