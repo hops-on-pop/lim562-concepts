@@ -27,8 +27,8 @@ export type ConceptTheme = {
 }
 
 const themes: Record<ConceptSlug, ConceptTheme> = {
-  "ai-ml-lifecycle": {
-    slug: "ai-ml-lifecycle",
+  "ml-lifecycle": {
+    slug: "ml-lifecycle",
     layout: "cycle",
     card: "border-indigo-900/10 bg-indigo-50/35",
     shell: "overflow-hidden rounded-2xl",

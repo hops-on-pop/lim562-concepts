@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   BarChart3,
@@ -8,21 +8,21 @@ import {
   FlaskConical,
   History,
   Rocket,
-} from "lucide-react";
-import { useReducedMotion } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
+} from "lucide-react"
+import { useReducedMotion } from "motion/react"
+import { useCallback, useEffect, useState } from "react"
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { getConceptTheme } from "@/lib/concept-themes";
-import { cn } from "@/lib/utils";
-import { AnimationControls } from "./animation-controls";
-import { ConceptExplorerShell } from "./concept-explorer-shell";
-import { LifecycleCycleDiagram } from "./lifecycle-cycle-diagram";
+} from "@/components/ui/accordion"
+import { getConceptTheme } from "@/lib/concept-themes"
+import { cn } from "@/lib/utils"
+import { AnimationControls } from "./animation-controls"
+import { ConceptExplorerShell } from "./concept-explorer-shell"
+import { LifecycleCycleDiagram } from "./lifecycle-cycle-diagram"
 
 const lifecycle = [
   {
@@ -73,7 +73,7 @@ const lifecycle = [
     detail:
       "Track drift, complaints, false confidence, changed collections, and policy updates. Monitoring turns AI from a demo into a governed service.",
   },
-];
+]
 
 const keyTerms = [
   {
@@ -136,93 +136,93 @@ const keyTerms = [
     definition:
       "Performance degrading over time as collections, language, or patron needs change faster than the training data.",
   },
-];
+]
 
-const theme = getConceptTheme("ai-ml-lifecycle");
-const PLAY_INTERVAL_MS = 2800;
+const theme = getConceptTheme("ml-lifecycle")
+const PLAY_INTERVAL_MS = 2800
 
 export function AiMlLifecycleExplorer() {
-  const prefersReducedMotion = useReducedMotion() ?? false;
-  const [active, setActive] = useState(0);
-  const [prevActive, setPrevActive] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const prefersReducedMotion = useReducedMotion() ?? false
+  const [active, setActive] = useState(0)
+  const [prevActive, setPrevActive] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
 
-  const current = lifecycle[active];
-  const Icon = current.icon;
-  const monitorIndex = lifecycle.length - 1;
+  const current = lifecycle[active]
+  const Icon = current.icon
+  const monitorIndex = lifecycle.length - 1
 
   const goTo = useCallback((index: number) => {
-    setIsPlaying(false);
+    setIsPlaying(false)
     setActive((currentIndex) => {
       if (index === currentIndex) {
-        return currentIndex;
+        return currentIndex
       }
-      setPrevActive(currentIndex);
-      return index;
-    });
-  }, []);
+      setPrevActive(currentIndex)
+      return index
+    })
+  }, [])
 
   const next = useCallback(() => {
     setActive((currentIndex) => {
-      setPrevActive(currentIndex);
+      setPrevActive(currentIndex)
       if (currentIndex === monitorIndex) {
-        return 0;
+        return 0
       }
-      return currentIndex + 1;
-    });
-    setIsPlaying(false);
-  }, [monitorIndex]);
+      return currentIndex + 1
+    })
+    setIsPlaying(false)
+  }, [monitorIndex])
 
   const previous = useCallback(() => {
     setActive((currentIndex) => {
-      setPrevActive(currentIndex);
+      setPrevActive(currentIndex)
       if (currentIndex === 0) {
-        return monitorIndex;
+        return monitorIndex
       }
-      return currentIndex - 1;
-    });
-    setIsPlaying(false);
-  }, [monitorIndex]);
+      return currentIndex - 1
+    })
+    setIsPlaying(false)
+  }, [monitorIndex])
 
   const play = useCallback(() => {
     if (prefersReducedMotion) {
-      return;
+      return
     }
-    setIsPlaying(true);
-  }, [prefersReducedMotion]);
+    setIsPlaying(true)
+  }, [prefersReducedMotion])
 
-  const pause = useCallback(() => setIsPlaying(false), []);
+  const pause = useCallback(() => setIsPlaying(false), [])
 
   useEffect(() => {
     if (!isPlaying || prefersReducedMotion) {
-      return;
+      return
     }
 
     const timer = window.setInterval(() => {
       setActive((currentIndex) => {
-        setPrevActive(currentIndex);
+        setPrevActive(currentIndex)
         if (currentIndex === monitorIndex) {
-          return 0;
+          return 0
         }
-        return currentIndex + 1;
-      });
-    }, PLAY_INTERVAL_MS);
+        return currentIndex + 1
+      })
+    }, PLAY_INTERVAL_MS)
 
-    return () => window.clearInterval(timer);
-  }, [isPlaying, prefersReducedMotion, monitorIndex]);
+    return () => window.clearInterval(timer)
+  }, [isPlaying, prefersReducedMotion, monitorIndex])
 
   useEffect(() => {
     if (prefersReducedMotion) {
-      setIsPlaying(false);
+      setIsPlaying(false)
     }
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion])
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(220px,280px)] lg:items-stretch">
       <ConceptExplorerShell
         className="flex h-full min-h-0 flex-col"
-        howItWorks="Select a stage or step around the lifecycle — AI/ML work revisits earlier stages in a continuous cycle."
-        slug="ai-ml-lifecycle"
+        howItWorks="Select a stage or step around the lifecycle — Machine Learning work revisits earlier stages in a continuous cycle."
+        slug="ml-lifecycle"
       >
         <div className="grid min-h-0 flex-1 gap-6 md:grid-cols-[minmax(0,1fr)_minmax(260px,320px)] md:items-stretch">
           <LifecycleCycleDiagram
@@ -272,7 +272,7 @@ export function AiMlLifecycleExplorer() {
 
       <KeyTermsPanel activeStage={current.label} />
     </div>
-  );
+  )
 }
 
 function KeyTermsPanel({ activeStage }: { activeStage: string }) {
@@ -289,12 +289,12 @@ function KeyTermsPanel({ activeStage }: { activeStage: string }) {
         id="ml-key-terms-heading"
       >
         <BookOpen className="size-4 shrink-0" />
-        Key AI/ML terms
+        Key Machine Learning terms
       </h3>
       <div className="mt-3 min-h-0 flex-1 overflow-y-auto pr-1">
         <Accordion className="w-full" multiple>
           {keyTerms.map((item) => {
-            const isRelevant = item.stage === activeStage;
+            const isRelevant = item.stage === activeStage
 
             return (
               <AccordionItem
@@ -327,10 +327,10 @@ function KeyTermsPanel({ activeStage }: { activeStage: string }) {
                   </p>
                 </AccordionContent>
               </AccordionItem>
-            );
+            )
           })}
         </Accordion>
       </div>
     </section>
-  );
+  )
 }

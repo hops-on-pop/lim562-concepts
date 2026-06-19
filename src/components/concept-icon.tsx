@@ -15,7 +15,7 @@ const icons: Record<ConceptSlug, LucideIcon> = {
   "dev-lifecycle": GitBranch,
   "web-app-architecture": Globe,
   "platform-tradeoffs": CloudCog,
-  "ai-ml-lifecycle": Binary,
+  "ml-lifecycle": Binary,
   "ai-ml-libraries": Brain,
   "metadata-linked-data": Library,
 }

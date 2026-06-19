@@ -2,7 +2,7 @@ export type ConceptSlug =
   | "dev-lifecycle"
   | "web-app-architecture"
   | "platform-tradeoffs"
-  | "ai-ml-lifecycle"
+  | "ml-lifecycle"
   | "ai-ml-libraries"
   | "metadata-linked-data"
 
@@ -61,18 +61,18 @@ export const concepts: Concept[] = [
       "No model is automatically best. The right choice depends on staffing, risk tolerance, privacy needs, budget, and mission fit.",
   },
   {
-    slug: "ai-ml-lifecycle",
-    title: "The AI/Machine Learning Lifecycle",
-    shortTitle: "AI/ML lifecycle",
+    slug: "ml-lifecycle",
+    title: "The Machine Learning Lifecycle",
+    shortTitle: "ML lifecycle",
     deckLabel: "Data -> model -> monitoring",
     summary:
       "Trace how an AI project moves from a library problem statement to data work, evaluation, deployment, and revision.",
     definition:
-      "The AI/ML lifecycle is the set of practices used to define a problem, prepare data, train or configure a model, evaluate results, deploy it, and monitor how it behaves over time.",
+      "The Machine Learning lifecycle is the set of practices used to define a problem, prepare data, train or configure a model, evaluate results, deploy it, and monitor how it behaves over time.",
     example:
       "A library might test a model that suggests subject headings, then compare suggestions against cataloger review before using it in production.",
     whyItMatters:
-      "AI systems inherit assumptions from goals, data, and evaluation choices, so responsible use requires attention across the whole lifecycle.",
+      "Machine Learning systems inherit assumptions from goals, data, and evaluation choices, so responsible use requires attention across the whole lifecycle.",
   },
   {
     slug: "ai-ml-libraries",
