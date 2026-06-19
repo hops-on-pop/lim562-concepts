@@ -5,6 +5,7 @@ import { AiMlLibraryBrowser } from "./ai-ml-library-browser";
 import { AiMlLifecycleExplorer } from "./ai-ml-lifecycle-explorer";
 import { ConceptMotionProvider } from "./concept-motion-provider";
 import { DevLifecycleExplorer } from "./dev-lifecycle-explorer";
+import { MetadataLinkedDataExplorer } from "./metadata-linked-data-explorer";
 import { PlatformTradeoffsExplorer } from "./platform-tradeoffs-explorer";
 import { WebAppArchitectureExplorer } from "./web-app-architecture-explorer";
 
@@ -28,5 +29,7 @@ function ConceptModule({ slug }: { slug: ConceptSlug }) {
       return <AiMlLifecycleExplorer />;
     case "ai-ml-libraries":
       return <AiMlLibraryBrowser />;
+    case "metadata-linked-data":
+      return <MetadataLinkedDataExplorer />;
   }
 }

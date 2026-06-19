@@ -3,6 +3,7 @@ import {
   Brain,
   CloudCog,
   GitBranch,
+  LibraryBig,
   type LucideIcon,
   Network,
 } from "lucide-react";
@@ -15,6 +16,7 @@ const icons: Record<ConceptSlug, LucideIcon> = {
   "platform-tradeoffs": CloudCog,
   "ai-ml-lifecycle": Binary,
   "ai-ml-libraries": Brain,
+  "metadata-linked-data": LibraryBig,
 };
 
 export function ConceptIcon({

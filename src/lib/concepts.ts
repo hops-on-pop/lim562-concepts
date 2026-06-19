@@ -3,18 +3,19 @@ export type ConceptSlug =
   | "web-app-architecture"
   | "platform-tradeoffs"
   | "ai-ml-lifecycle"
-  | "ai-ml-libraries";
+  | "ai-ml-libraries"
+  | "metadata-linked-data"
 
 export type Concept = {
-  slug: ConceptSlug;
-  title: string;
-  shortTitle: string;
-  deckLabel: string;
-  summary: string;
-  definition: string;
-  example: string;
-  whyItMatters: string;
-};
+  slug: ConceptSlug
+  title: string
+  shortTitle: string
+  deckLabel: string
+  summary: string
+  definition: string
+  example: string
+  whyItMatters: string
+}
 
 export const concepts: Concept[] = [
   {
@@ -25,7 +26,7 @@ export const concepts: Concept[] = [
     summary:
       "Follow the seven SDLC phases as a library catalog improvement moves from planning through deployment and ongoing maintenance.",
     definition:
-      "The software development lifecycle (SDLC) is a structured, iterative path teams use to plan, build, deliver, and maintain software that meets stakeholder needs.",
+      "The software development lifecycle (SDLC) is a structured, iterative path teams use to plan, build, deliver, and maintain software that meets stakeholder needs. Note: This is just one process within the overarching project planning process.",
     example:
       "A public services librarian notices patrons struggle to renew checked-out items, so the team prototypes clearer renewal language, tests it, and ships the change.",
     whyItMatters:
@@ -39,7 +40,7 @@ export const concepts: Concept[] = [
     summary:
       "Step through a catalog search request as it moves between the browser, server logic, database, and response.",
     definition:
-      "A web application coordinates interface code, server logic, and stored data so a user action can produce a useful response.",
+      "A web application coordinates interface code, server logic, and stored data to process a user action and produce a useful response.",
     example:
       "When a patron searches for Octavia Butler, the browser sends a request, the server validates it, the database finds matching records, and the page updates.",
     whyItMatters:
@@ -51,17 +52,17 @@ export const concepts: Concept[] = [
     shortTitle: "Platform tradeoffs",
     deckLabel: "On-prem -> IaaS -> PaaS -> SaaS",
     summary:
-      "Compare on-premises, IaaS, PaaS, and SaaS hosting and see how each model shifts who manages the technology stack.",
+      "Choose open source or proprietary software, then compare the hosting models that fit that ownership choice.",
     definition:
-      "Hosting choices sit on a spectrum — on-premises, infrastructure as a service (IaaS), platform as a service (PaaS), and software as a service (SaaS) — and each step hands more of the stack to a provider, while software ownership (open source or proprietary) remains a separate, independent decision.",
+      "Hosting choices sit on a spectrum and each step hands more of the stack to a provider, while software ownership (open source or proprietary) remains a separate, independent decision.",
     example:
-      "A library can run Koha on its own servers, on cloud virtual machines it manages (IaaS), or pay a vendor to deliver it fully hosted — the same open-source software with very different operational responsibilities.",
+      "A library can run open-source Koha on its own servers, cloud virtual machines, or a hosted SaaS service; proprietary systems more often appear as licensed local installs, cloud-hosted VMs, or full SaaS products.",
     whyItMatters:
       "No model is automatically best. The right choice depends on staffing, risk tolerance, privacy needs, budget, and mission fit.",
   },
   {
     slug: "ai-ml-lifecycle",
-    title: "The AI/ML Lifecycle",
+    title: "The AI/Machine Learning Lifecycle",
     shortTitle: "AI/ML lifecycle",
     deckLabel: "Data -> model -> monitoring",
     summary:
@@ -87,17 +88,31 @@ export const concepts: Concept[] = [
     whyItMatters:
       "These tools can expand service capacity and speed routine work, but library values require transparent evaluation, explainability, and careful boundaries.",
   },
-];
+  {
+    slug: "metadata-linked-data",
+    title: "Metadata and Linked Data Models",
+    shortTitle: "Metadata & linked data",
+    deckLabel: "Record -> graph",
+    summary:
+      "See how one library resource can be described as metadata, expressed in Dublin Core, encoded in MARC, modeled in BIBFRAME, and connected as linked data.",
+    definition:
+      "Metadata is structured description. Dublin Core offers simple cross-domain elements, MARC packages description in catalog records, and BIBFRAME and linked data model resources, people, subjects, and copies as identifiable things with relationships.",
+    example:
+      "A catalog record for a community history book can be summarized with Dublin Core elements, read as fields in MARC, separated into Work, Instance, Item, Agent, and Subject entities in BIBFRAME, then connected to authority identifiers on the web.",
+    whyItMatters:
+      "These models shape what catalogs can connect, reuse, explain, and share beyond a single local record.",
+  },
+]
 
 export function getConcept(slug: string) {
-  return concepts.find((concept) => concept.slug === slug);
+  return concepts.find((concept) => concept.slug === slug)
 }
 
 export function getConceptNeighbors(slug: ConceptSlug) {
-  const index = concepts.findIndex((concept) => concept.slug === slug);
+  const index = concepts.findIndex((concept) => concept.slug === slug)
 
   return {
     previous: concepts[(index - 1 + concepts.length) % concepts.length],
     next: concepts[(index + 1) % concepts.length],
-  };
+  }
 }

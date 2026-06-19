@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   ClipboardList,
@@ -8,17 +8,17 @@ import {
   Rocket,
   SearchCheck,
   Wrench,
-} from "lucide-react";
-import { useReducedMotion } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
+} from "lucide-react"
+import { useReducedMotion } from "motion/react"
+import { useCallback, useEffect, useState } from "react"
 
-import { Badge } from "@/components/ui/badge";
-import { getConceptTheme } from "@/lib/concept-themes";
-import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge"
+import { getConceptTheme } from "@/lib/concept-themes"
+import { cn } from "@/lib/utils"
 
-import { AnimationControls } from "./animation-controls";
-import { ConceptExplorerShell } from "./concept-explorer-shell";
-import { LifecycleCycleDiagram } from "./lifecycle-cycle-diagram";
+import { AnimationControls } from "./animation-controls"
+import { ConceptExplorerShell } from "./concept-explorer-shell"
+import { LifecycleCycleDiagram } from "./lifecycle-cycle-diagram"
 
 const stages = [
   {
@@ -37,7 +37,7 @@ const stages = [
     actor: "Librarians and analysts",
     deliverable: "Requirements documentation",
     detail:
-      "Staff gather patron pain points, policy rules, and workflow constraints, turning the high-level idea into detailed requirements.",
+      "Staff compile, review, and analyze patron pain points, policy rules, and workflow constraints, turning the high-level idea into detailed requirements.",
   },
   {
     label: "Design",
@@ -46,16 +46,16 @@ const stages = [
     actor: "Developers and UX",
     deliverable: "Software design document",
     detail:
-      "The team defines how renewal screens, navigation, and integrations will work—often captured in a design document before coding begins.",
+      "The team defines how renewal screens, navigation, and integrations will work—often. This phase includes designs, and may include prototyping or interactive wireframes.",
   },
   {
     label: "Coding",
     shortLabel: "Code",
     icon: Code2,
     actor: "Developers",
-    deliverable: "Functional software prototype",
+    deliverable: "Functional application",
     detail:
-      "Engineers write the code for a working prototype: renewal labels, API hooks, and supporting interfaces the catalog needs.",
+      "Developers write the code for an initial working application, including implementing frontend, backend, and database specifications. ",
   },
   {
     label: "Testing",
@@ -64,7 +64,7 @@ const stages = [
     actor: "Mixed review group",
     deliverable: "Refined, tested software",
     detail:
-      "Quality checks catch bugs and accessibility gaps through unit, integration, and acceptance testing until the flow is reliable.",
+      "Quality assurance testing catches bugs and accessibility gaps through unit, integration, and acceptance testing until the flow is reliable.",
   },
   {
     label: "Deployment",
@@ -82,79 +82,79 @@ const stages = [
     actor: "Operations and developers",
     deliverable: "Updated and optimized code",
     detail:
-      "After launch, the team patches issues, handles new use cases, and plans the next round—maintenance feeds back into planning in iterative models.",
+      "After launch, the team patches issues, handles new use cases, and plans future improvements and features based on user and staff feedback.",
   },
-];
+]
 
-const theme = getConceptTheme("dev-lifecycle");
-const PLAY_INTERVAL_MS = 2800;
-const LAST_INDEX = stages.length - 1;
+const theme = getConceptTheme("dev-lifecycle")
+const PLAY_INTERVAL_MS = 2800
+const LAST_INDEX = stages.length - 1
 
 export function DevLifecycleExplorer() {
-  const prefersReducedMotion = useReducedMotion() ?? false;
-  const [active, setActive] = useState(0);
-  const [prevActive, setPrevActive] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const prefersReducedMotion = useReducedMotion() ?? false
+  const [active, setActive] = useState(0)
+  const [prevActive, setPrevActive] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
 
-  const stage = stages[active];
-  const Icon = stage.icon;
+  const stage = stages[active]
+  const Icon = stage.icon
 
   const goTo = useCallback((index: number) => {
-    setIsPlaying(false);
+    setIsPlaying(false)
     setActive((current) => {
       if (index === current) {
-        return current;
+        return current
       }
-      setPrevActive(current);
-      return index;
-    });
-  }, []);
+      setPrevActive(current)
+      return index
+    })
+  }, [])
 
   const next = useCallback(() => {
     setActive((current) => {
-      setPrevActive(current);
-      return current === LAST_INDEX ? 0 : current + 1;
-    });
-    setIsPlaying(false);
-  }, []);
+      setPrevActive(current)
+      return current === LAST_INDEX ? 0 : current + 1
+    })
+    setIsPlaying(false)
+  }, [])
 
   const previous = useCallback(() => {
     setActive((current) => {
-      setPrevActive(current);
-      return current === 0 ? LAST_INDEX : current - 1;
-    });
-    setIsPlaying(false);
-  }, []);
+      setPrevActive(current)
+      return current === 0 ? LAST_INDEX : current - 1
+    })
+    setIsPlaying(false)
+  }, [])
 
   const play = useCallback(() => {
     if (prefersReducedMotion) {
-      return;
+      return
     }
-    setIsPlaying(true);
-  }, [prefersReducedMotion]);
+    setIsPlaying(true)
+  }, [prefersReducedMotion])
 
-  const pause = useCallback(() => setIsPlaying(false), []);
+  const pause = useCallback(() => setIsPlaying(false), [])
 
   useEffect(() => {
     if (!isPlaying || prefersReducedMotion) {
-      return;
+      return
     }
 
     const timer = window.setInterval(() => {
       setActive((current) => {
-        setPrevActive(current);
-        return current === LAST_INDEX ? 0 : current + 1;
-      });
-    }, PLAY_INTERVAL_MS);
+        setPrevActive(current)
+        return current === LAST_INDEX ? 0 : current + 1
+      })
+    }, PLAY_INTERVAL_MS)
 
-    return () => window.clearInterval(timer);
-  }, [isPlaying, prefersReducedMotion]);
+    return () => window.clearInterval(timer)
+  }, [isPlaying, prefersReducedMotion])
 
   useEffect(() => {
     if (prefersReducedMotion) {
-      setIsPlaying(false);
+      setIsPlaying(false)
     }
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion])
 
   return (
     <ConceptExplorerShell
@@ -168,7 +168,7 @@ export function DevLifecycleExplorer() {
           loopLabel="iterate"
           markerId="dev-sdlc-cycle-arrow"
           onSelectAction={goTo}
-          palette="cyan"
+          palette="sky"
           prevIndex={prevActive}
           stages={stages}
           theme={theme}
@@ -210,5 +210,5 @@ export function DevLifecycleExplorer() {
         stepLabel={`${stage.label} · phase ${active + 1} of ${stages.length}`}
       />
     </ConceptExplorerShell>
-  );
+  )
 }

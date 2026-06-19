@@ -1,38 +1,38 @@
-"use client";
+"use client"
 
-import type { LucideIcon } from "lucide-react";
-import { useReducedMotion } from "motion/react";
-import { useEffect, useState } from "react";
+import type { LucideIcon } from "lucide-react"
+import { useReducedMotion } from "motion/react"
+import { useEffect, useState } from "react"
 
 import {
   MARKER_HIDE_TRAVEL_FRACTION,
   MOTION_DURATION,
   travelTransition,
-} from "@/lib/animation";
-import type { ConceptTheme } from "@/lib/concept-themes";
-import { motion } from "@/lib/motion";
-import { cn } from "@/lib/utils";
+} from "@/lib/animation"
+import type { ConceptTheme } from "@/lib/concept-themes"
+import { motion } from "@/lib/motion"
+import { cn } from "@/lib/utils"
 
-const VIEW_SIZE = 400;
-const CENTER = VIEW_SIZE / 2;
-const NODE_RADIUS = 148;
-const ARC_RADIUS = 118;
+const VIEW_SIZE = 400
+const CENTER = VIEW_SIZE / 2
+const NODE_RADIUS = 148
+const ARC_RADIUS = 118
 
 export type CycleStage = {
-  label: string;
-  shortLabel: string;
-  icon: LucideIcon;
-};
+  label: string
+  shortLabel: string
+  icon: LucideIcon
+}
 
 type CyclePalette = {
-  arc: string;
-  arcActive: string;
-  arcLoop: string;
-  token: string;
-  loopText: string;
-  arrow: string;
-  verticalLoop: string;
-};
+  arc: string
+  arcActive: string
+  arcLoop: string
+  token: string
+  loopText: string
+  arrow: string
+  verticalLoop: string
+}
 
 const palettes = {
   indigo: {
@@ -44,30 +44,30 @@ const palettes = {
     arrow: "#6366f1",
     verticalLoop: "text-indigo-700",
   },
-  cyan: {
-    arc: "stroke-cyan-200",
-    arcActive: "stroke-cyan-400",
-    arcLoop: "stroke-cyan-500",
-    token: "fill-cyan-600",
-    loopText: "fill-cyan-800",
-    arrow: "#0891b2",
-    verticalLoop: "text-cyan-800",
+  sky: {
+    arc: "stroke-sky-200",
+    arcActive: "stroke-sky-400",
+    arcLoop: "stroke-sky-500",
+    token: "fill-sky-600",
+    loopText: "fill-sky-800",
+    arrow: "#0284c7",
+    verticalLoop: "text-sky-800",
   },
-} satisfies Record<string, CyclePalette>;
+} satisfies Record<string, CyclePalette>
 
 type LifecycleCycleDiagramProps = {
-  stages: CycleStage[];
-  activeIndex: number;
-  prevIndex: number;
-  onSelectAction: (index: number) => void;
-  theme: ConceptTheme;
-  palette?: keyof typeof palettes;
-  loopLabel?: string;
-  markerId: string;
-};
+  stages: CycleStage[]
+  activeIndex: number
+  prevIndex: number
+  onSelectAction: (index: number) => void
+  theme: ConceptTheme
+  palette?: keyof typeof palettes
+  loopLabel?: string
+  markerId: string
+}
 
 function stageAngle(index: number, total: number) {
-  return -Math.PI / 2 + (index * 2 * Math.PI) / total;
+  return -Math.PI / 2 + (index * 2 * Math.PI) / total
 }
 
 function polarToCartesian(
@@ -79,7 +79,7 @@ function polarToCartesian(
   return {
     x: cx + radius * Math.cos(angle),
     y: cy + radius * Math.sin(angle),
-  };
+  }
 }
 
 function describeArc(
@@ -89,17 +89,17 @@ function describeArc(
   startAngle: number,
   endAngle: number,
 ) {
-  const start = polarToCartesian(cx, cy, radius, startAngle);
-  const end = polarToCartesian(cx, cy, radius, endAngle);
-  const sweep = endAngle - startAngle;
-  const largeArc = sweep > Math.PI ? 1 : 0;
+  const start = polarToCartesian(cx, cy, radius, startAngle)
+  const end = polarToCartesian(cx, cy, radius, endAngle)
+  const sweep = endAngle - startAngle
+  const largeArc = sweep > Math.PI ? 1 : 0
 
-  return `M ${start.x} ${start.y} A ${radius} ${radius} 0 ${largeArc} 1 ${end.x} ${end.y}`;
+  return `M ${start.x} ${start.y} A ${radius} ${radius} 0 ${largeArc} 1 ${end.x} ${end.y}`
 }
 
 function nodePosition(index: number, total: number) {
-  const angle = stageAngle(index, total);
-  return polarToCartesian(CENTER, CENTER, NODE_RADIUS, angle);
+  const angle = stageAngle(index, total)
+  return polarToCartesian(CENTER, CENTER, NODE_RADIUS, angle)
 }
 
 function buildTravelPath(fromIndex: number, toIndex: number, total: number) {
@@ -108,34 +108,34 @@ function buildTravelPath(fromIndex: number, toIndex: number, total: number) {
     CENTER,
     ARC_RADIUS,
     stageAngle(fromIndex, total),
-  );
+  )
   if (fromIndex === toIndex) {
-    return `M ${point.x} ${point.y} L ${point.x} ${point.y}`;
+    return `M ${point.x} ${point.y} L ${point.x} ${point.y}`
   }
 
-  const steps = (toIndex - fromIndex + total) % total;
-  let path = "";
-  let current = fromIndex;
+  const steps = (toIndex - fromIndex + total) % total
+  let path = ""
+  let current = fromIndex
 
   for (let step = 0; step < steps; step += 1) {
-    const next = (current + 1) % total;
+    const next = (current + 1) % total
     const segment = describeArc(
       CENTER,
       CENTER,
       ARC_RADIUS,
       stageAngle(current, total),
       stageAngle(next, total),
-    );
+    )
 
     if (step === 0) {
-      path = segment;
+      path = segment
     } else {
-      path += ` ${segment.slice(segment.indexOf("A"))}`;
+      path += ` ${segment.slice(segment.indexOf("A"))}`
     }
-    current = next;
+    current = next
   }
 
-  return path;
+  return path
 }
 
 export function LifecycleCycleDiagram({
@@ -148,35 +148,35 @@ export function LifecycleCycleDiagram({
   loopLabel = "revise",
   markerId,
 }: LifecycleCycleDiagramProps) {
-  const prefersReducedMotion = useReducedMotion() ?? false;
-  const colors = palettes[palette];
-  const total = stages.length;
-  const isTraveling = !prefersReducedMotion && prevIndex !== activeIndex;
-  const [markerHiddenAt, setMarkerHiddenAt] = useState(activeIndex);
-  const travelPath = buildTravelPath(prevIndex, activeIndex, total);
+  const prefersReducedMotion = useReducedMotion() ?? false
+  const colors = palettes[palette]
+  const total = stages.length
+  const isTraveling = !prefersReducedMotion && prevIndex !== activeIndex
+  const [markerHiddenAt, setMarkerHiddenAt] = useState(activeIndex)
+  const travelPath = buildTravelPath(prevIndex, activeIndex, total)
 
   useEffect(() => {
     if (!isTraveling) {
-      setMarkerHiddenAt(activeIndex);
-      return;
+      setMarkerHiddenAt(activeIndex)
+      return
     }
 
-    setMarkerHiddenAt(prevIndex);
-    const hideMs = MOTION_DURATION.travel * MARKER_HIDE_TRAVEL_FRACTION * 1000;
+    setMarkerHiddenAt(prevIndex)
+    const hideMs = MOTION_DURATION.travel * MARKER_HIDE_TRAVEL_FRACTION * 1000
     const timer = window.setTimeout(
       () => setMarkerHiddenAt(activeIndex),
       hideMs,
-    );
+    )
 
-    return () => window.clearTimeout(timer);
-  }, [activeIndex, prevIndex, isTraveling]);
+    return () => window.clearTimeout(timer)
+  }, [activeIndex, prevIndex, isTraveling])
   const reviseMid = polarToCartesian(
     CENTER,
     CENTER,
     ARC_RADIUS + 22,
     stageAngle(total - 1, total) + Math.PI / total,
-  );
-  const markerRef = `url(#${markerId})`;
+  )
+  const markerRef = `url(#${markerId})`
 
   return (
     <div className="mx-auto w-full max-w-md min-[401px]:max-w-xl">
@@ -201,15 +201,15 @@ export function LifecycleCycleDiagram({
           </defs>
 
           {stages.map((stage, index) => {
-            const next = (index + 1) % total;
-            const isLoop = index === total - 1;
+            const next = (index + 1) % total
+            const isLoop = index === total - 1
             const path = describeArc(
               CENTER,
               CENTER,
               ARC_RADIUS,
               stageAngle(index, total),
               stageAngle(next, total),
-            );
+            )
 
             return (
               <path
@@ -226,7 +226,7 @@ export function LifecycleCycleDiagram({
                 strokeDasharray={isLoop ? "6 4" : undefined}
                 strokeWidth={isLoop ? 2.5 : 1.75}
               />
-            );
+            )
           })}
 
           <text
@@ -244,7 +244,7 @@ export function LifecycleCycleDiagram({
               CENTER,
               ARC_RADIUS,
               stageAngle(activeIndex, total),
-            );
+            )
             if (isTraveling) {
               return (
                 <motion.circle
@@ -256,7 +256,7 @@ export function LifecycleCycleDiagram({
                   style={{ offsetPath: `path('${travelPath}')` }}
                   transition={travelTransition(prefersReducedMotion)}
                 />
-              );
+              )
             }
 
             return (
@@ -266,16 +266,16 @@ export function LifecycleCycleDiagram({
                 cy={tokenAt.y}
                 r={7}
               />
-            );
+            )
           })()}
         </svg>
 
         {stages.map((stage, index) => {
-          const { x, y } = nodePosition(index, total);
-          const isActive = index === activeIndex;
-          const Icon = stage.icon;
-          const left = `${(x / VIEW_SIZE) * 100}%`;
-          const top = `${(y / VIEW_SIZE) * 100}%`;
+          const { x, y } = nodePosition(index, total)
+          const isActive = index === activeIndex
+          const Icon = stage.icon
+          const left = `${(x / VIEW_SIZE) * 100}%`
+          const top = `${(y / VIEW_SIZE) * 100}%`
 
           return (
             <button
@@ -295,7 +295,7 @@ export function LifecycleCycleDiagram({
                 {stage.shortLabel}
               </span>
             </button>
-          );
+          )
         })}
       </div>
 
@@ -308,7 +308,7 @@ export function LifecycleCycleDiagram({
         verticalLoopClass={colors.verticalLoop}
       />
     </div>
-  );
+  )
 }
 
 function VerticalCycle({
@@ -319,19 +319,19 @@ function VerticalCycle({
   loopLabel,
   verticalLoopClass,
 }: {
-  stages: CycleStage[];
-  activeIndex: number;
-  onSelect: (index: number) => void;
-  theme: ConceptTheme;
-  loopLabel: string;
-  verticalLoopClass: string;
+  stages: CycleStage[]
+  activeIndex: number
+  onSelect: (index: number) => void
+  theme: ConceptTheme
+  loopLabel: string
+  verticalLoopClass: string
 }) {
   return (
     <div className="flex flex-col items-center gap-1 min-[401px]:hidden">
       {stages.map((stage, index) => {
-        const Icon = stage.icon;
-        const isActive = index === activeIndex;
-        const isLast = index === stages.length - 1;
+        const Icon = stage.icon
+        const isActive = index === activeIndex
+        const isLast = index === stages.length - 1
 
         return (
           <div
@@ -369,8 +369,8 @@ function VerticalCycle({
               </span>
             )}
           </div>
-        );
+        )
       })}
     </div>
-  );
+  )
 }

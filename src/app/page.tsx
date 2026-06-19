@@ -4,15 +4,9 @@ import Link from "next/link"
 import { ConceptIcon } from "@/components/concept-icon"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { concepts } from "@/lib/concepts"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getConceptTheme } from "@/lib/concept-themes"
+import { concepts } from "@/lib/concepts"
 import { cn } from "@/lib/utils"
 
 export default function Home() {
@@ -47,52 +41,52 @@ export default function Home() {
             </Badge>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {concepts.map((concept, index) => {
               const theme = getConceptTheme(concept.slug)
 
               return (
-              <Card
-                className="group bg-white/90 transition-colors hover:border-primary/30"
-                key={concept.slug}
-              >
-                <CardHeader>
-                  <div className="mb-3 flex items-start justify-between gap-3">
-                    <span
+                <Card
+                  className="group bg-white/90 transition-colors hover:border-primary/30"
+                  key={concept.slug}
+                >
+                  <CardHeader>
+                    <div className="mb-3 flex items-center gap-3">
+                      <span
+                        className={cn(
+                          "flex size-10 items-center justify-center rounded-lg",
+                          theme.iconBadge,
+                        )}
+                      >
+                        <ConceptIcon className="size-5" slug={concept.slug} />
+                      </span>
+
+                      <CardTitle className="text-lg leading-tight flex items-center">
+                        {concept.title}
+                      </CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex flex-1 flex-col gap-4">
+                    <p className="min-h-24 text-sm leading-6 text-muted-foreground">
+                      {concept.definition}
+                    </p>
+                    <Link
                       className={cn(
-                        "flex size-10 items-center justify-center rounded-lg",
+                        buttonVariants({
+                          className:
+                            "mt-auto w-full justify-between text-base font-bold",
+                          variant: "ghost",
+                        }),
                         theme.iconBadge,
+                        theme.iconBadgeHover,
                       )}
+                      href={`/concepts/${concept.slug}`}
                     >
-                      <ConceptIcon className="size-5" slug={concept.slug} />
-                    </span>
-                    <Badge variant="outline">
-                      {String(index + 1).padStart(2, "0")}
-                    </Badge>
-                  </div>
-                  <CardTitle>{concept.title}</CardTitle>
-                  <CardDescription>{concept.deckLabel}</CardDescription>
-                </CardHeader>
-                <CardContent className="flex flex-1 flex-col gap-4">
-                  <p className="min-h-24 text-sm leading-6 text-muted-foreground">
-                    {concept.definition}
-                  </p>
-                  <Link
-                    className={cn(
-                      buttonVariants({
-                        className: "mt-auto w-full justify-between",
-                        variant: "ghost",
-                      }),
-                      theme.iconBadge,
-                      theme.iconBadgeHover,
-                    )}
-                    href={`/concepts/${concept.slug}`}
-                  >
-                    Open topic
-                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
-                </CardContent>
-              </Card>
+                      Open topic
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </CardContent>
+                </Card>
               )
             })}
           </div>

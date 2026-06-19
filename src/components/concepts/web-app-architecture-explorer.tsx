@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   AlertTriangle,
@@ -7,39 +7,39 @@ import {
   Server,
   ShieldCheck,
   SquareTerminal,
-} from "lucide-react";
-import { useReducedMotion } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
+} from "lucide-react"
+import { useReducedMotion } from "motion/react"
+import { useCallback, useEffect, useState } from "react"
 
-import { getConceptTheme } from "@/lib/concept-themes";
-import { cn } from "@/lib/utils";
+import { getConceptTheme } from "@/lib/concept-themes"
+import { cn } from "@/lib/utils"
 
-import { AnimationControls } from "./animation-controls";
-import { ConceptExplorerShell } from "./concept-explorer-shell";
+import { AnimationControls } from "./animation-controls"
+import { ConceptExplorerShell } from "./concept-explorer-shell"
 import {
   type JourneyLayer,
   type JourneyStep,
   RequestJourneyDiagram,
-} from "./request-journey-diagram";
+} from "./request-journey-diagram"
 
 type WebAppJourneyStep = JourneyStep & {
-  label: string;
-  detail: string;
-  snippetLabel: string;
-  snippet: string;
-};
+  label: string
+  detail: string
+  snippetLabel: string
+  snippet: string
+}
 
 type LayerProfile = {
-  tech: string[];
-  failureSign: string;
-};
+  tech: string[]
+  failureSign: string
+}
 
 const layers: JourneyLayer[] = [
   { id: "browser", label: "Browser", icon: Monitor },
   { id: "server", label: "Server", icon: Server },
   { id: "logic", label: "App logic", icon: ShieldCheck },
   { id: "database", label: "Database", icon: Database },
-];
+]
 
 const layerProfiles: Record<string, LayerProfile> = {
   browser: {
@@ -62,7 +62,7 @@ const layerProfiles: Record<string, LayerProfile> = {
     failureSign:
       "Searches that hang forever, or records that come back missing or stale.",
   },
-};
+}
 
 const journeySteps: WebAppJourneyStep[] = [
   {
@@ -72,7 +72,7 @@ const journeySteps: WebAppJourneyStep[] = [
     leg: "request",
     label: "Browser",
     detail:
-      "The patron types a search and presses Enter. The browser packages the words as an HTTP request — a structured message that names the page it wants and carries the query — and sends it across the network.",
+      "The patron types a search and presses Enter. The browser packages the words as an HTTP request ( a structured message) that carries the query, and sends it across the network to the server.",
     snippetLabel: "What the browser sends",
     snippet: "GET /catalog/search?q=solar+power",
   },
@@ -94,7 +94,7 @@ const journeySteps: WebAppJourneyStep[] = [
     leg: "request",
     label: "App logic",
     detail:
-      "The application validates the input, applies library rules — like hiding suppressed records — and translates the patron's words into a precise query the database can execute.",
+      "The application validates the input, applies library rules, such as hiding suppressed records, and translates the patron's words into a precise query the database can execute.",
     snippetLabel: "The query the app prepares",
     snippet: "SELECT title, format, status FROM records WHERE …",
   },
@@ -105,7 +105,7 @@ const journeySteps: WebAppJourneyStep[] = [
     leg: "request",
     label: "Database",
     detail:
-      "The database scans its indexes for matching bibliographic, holdings, and availability records, then returns structured rows — fast, because the data is organized for exactly this kind of lookup.",
+      "The database scans its indexes for matching bibliographic, holdings, and availability records, then returns structured rows.",
     snippetLabel: "What the database returns",
     snippet: "3 matching rows · 12 ms",
   },
@@ -116,7 +116,7 @@ const journeySteps: WebAppJourneyStep[] = [
     leg: "response",
     label: "App logic",
     detail:
-      "On the way back, the application reshapes raw rows into a response the interface understands — JSON with titles, availability text, and links — and hands it to the server to deliver.",
+      "On the way back, the application reshapes raw data from the database into a response the interface understands (typically  JSON) with titles, availability text, and links,  and hands it to the server to deliver.",
     snippetLabel: "The response the app builds",
     snippet: "200 OK · application/json",
   },
@@ -127,93 +127,93 @@ const journeySteps: WebAppJourneyStep[] = [
     leg: "response",
     label: "Browser",
     detail:
-      "The browser receives the response and updates the result list in place. The patron sees titles and availability — never the servers, queries, and formatting steps that produced them.",
+      "The browser receives the response and updates the result list in place. The patron sees titles and availability, without directly seeing the servers, queries, and formatting steps that produced them.",
     snippetLabel: "What the patron sees",
     snippet: "3 results rendered",
   },
-];
+]
 
-const theme = getConceptTheme("web-app-architecture");
-const PLAY_INTERVAL_MS = 2600;
-const LAST_INDEX = journeySteps.length - 1;
+const theme = getConceptTheme("web-app-architecture")
+const PLAY_INTERVAL_MS = 2600
+const LAST_INDEX = journeySteps.length - 1
 
 export function WebAppArchitectureExplorer() {
-  const prefersReducedMotion = useReducedMotion() ?? false;
-  const [active, setActive] = useState(0);
-  const [prevActive, setPrevActive] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const prefersReducedMotion = useReducedMotion() ?? false
+  const [active, setActive] = useState(0)
+  const [prevActive, setPrevActive] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
 
-  const step = journeySteps[active];
-  const layer = layers[step.layerIndex];
-  const profile = layerProfiles[step.layerId];
-  const LayerIcon = layer.icon;
+  const step = journeySteps[active]
+  const layer = layers[step.layerIndex]
+  const profile = layerProfiles[step.layerId]
+  const LayerIcon = layer.icon
 
   const goTo = useCallback((index: number) => {
-    setIsPlaying(false);
+    setIsPlaying(false)
     setActive((current) => {
       if (index === current) {
-        return current;
+        return current
       }
-      setPrevActive(current);
-      return index;
-    });
-  }, []);
+      setPrevActive(current)
+      return index
+    })
+  }, [])
 
   const next = useCallback(() => {
     setActive((current) => {
-      setPrevActive(current);
-      return current === LAST_INDEX ? 0 : current + 1;
-    });
-    setIsPlaying(false);
-  }, []);
+      setPrevActive(current)
+      return current === LAST_INDEX ? 0 : current + 1
+    })
+    setIsPlaying(false)
+  }, [])
 
   const previous = useCallback(() => {
     setActive((current) => {
-      setPrevActive(current);
-      return current === 0 ? LAST_INDEX : current - 1;
-    });
-    setIsPlaying(false);
-  }, []);
+      setPrevActive(current)
+      return current === 0 ? LAST_INDEX : current - 1
+    })
+    setIsPlaying(false)
+  }, [])
 
   const play = useCallback(() => {
     if (prefersReducedMotion) {
-      return;
+      return
     }
-    setActive((current) => (current === LAST_INDEX ? 0 : current));
-    setIsPlaying(true);
-  }, [prefersReducedMotion]);
+    setActive((current) => (current === LAST_INDEX ? 0 : current))
+    setIsPlaying(true)
+  }, [prefersReducedMotion])
 
-  const pause = useCallback(() => setIsPlaying(false), []);
+  const pause = useCallback(() => setIsPlaying(false), [])
 
   useEffect(() => {
     if (!isPlaying || prefersReducedMotion) {
-      return;
+      return
     }
 
     const timer = window.setInterval(() => {
       setActive((current) => {
         if (current === LAST_INDEX) {
-          return current;
+          return current
         }
-        setPrevActive(current);
-        return current + 1;
-      });
-    }, PLAY_INTERVAL_MS);
+        setPrevActive(current)
+        return current + 1
+      })
+    }, PLAY_INTERVAL_MS)
 
-    return () => window.clearInterval(timer);
-  }, [isPlaying, prefersReducedMotion]);
+    return () => window.clearInterval(timer)
+  }, [isPlaying, prefersReducedMotion])
 
   useEffect(() => {
     if (isPlaying && active === LAST_INDEX) {
-      setIsPlaying(false);
+      setIsPlaying(false)
     }
-  }, [isPlaying, active]);
+  }, [isPlaying, active])
 
   useEffect(() => {
     if (prefersReducedMotion) {
-      setIsPlaying(false);
+      setIsPlaying(false)
     }
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion])
 
   return (
     <ConceptExplorerShell
@@ -301,5 +301,5 @@ export function WebAppArchitectureExplorer() {
         stepLabel={`${step.label} · step ${active + 1} of ${journeySteps.length}`}
       />
     </ConceptExplorerShell>
-  );
+  )
 }

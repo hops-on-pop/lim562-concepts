@@ -6,6 +6,7 @@ export type ConceptLayoutRhythm =
   | "journey"
   | "quadrant"
   | "categories"
+  | "stages"
 
 export type ConceptTheme = {
   slug: ConceptSlug
@@ -46,19 +47,19 @@ const themes: Record<ConceptSlug, ConceptTheme> = {
   "dev-lifecycle": {
     slug: "dev-lifecycle",
     layout: "pipeline",
-    card: "border-cyan-900/10 bg-cyan-50/35",
-    shell: "border-l-4 border-l-cyan-600/40 rounded-r-xl rounded-l-md",
-    header: "border-b border-cyan-900/5 pb-4",
+    card: "border-sky-900/10 bg-sky-50/35",
+    shell: "border-l-4 border-l-sky-600/40 rounded-r-xl rounded-l-md",
+    header: "border-b border-sky-900/5 pb-4",
     contentGap: "space-y-8",
     detailPanel: "rounded-xl border bg-white p-4",
-    iconBadge: "bg-cyan-700 text-white",
-    iconBadgeHover: "hover:bg-cyan-800 hover:text-white",
-    accentText: "text-cyan-950",
-    accentMuted: "text-cyan-900",
-    accentSurface: "bg-cyan-50",
-    activeControl: "border-cyan-700 bg-white text-cyan-950",
+    iconBadge: "bg-sky-700 text-white",
+    iconBadgeHover: "hover:bg-sky-800 hover:text-white",
+    accentText: "text-sky-950",
+    accentMuted: "text-sky-900",
+    accentSurface: "bg-sky-50",
+    activeControl: "border-sky-700 bg-white text-sky-950",
     inactiveControl: "",
-    callout: "text-sm font-medium text-cyan-900",
+    callout: "text-sm font-medium text-sky-900",
   },
   "web-app-architecture": {
     slug: "web-app-architecture",
@@ -80,19 +81,19 @@ const themes: Record<ConceptSlug, ConceptTheme> = {
   "platform-tradeoffs": {
     slug: "platform-tradeoffs",
     layout: "quadrant",
-    card: "border-amber-900/10 bg-amber-50/35",
-    shell: "ring-1 ring-amber-900/5",
+    card: "border-orange-900/10 bg-orange-50/35",
+    shell: "ring-1 ring-orange-900/5",
     header: "sm:px-1",
     contentGap: "space-y-6",
     detailPanel: "rounded-xl border bg-white p-5",
-    iconBadge: "bg-yellow-700 text-white",
-    iconBadgeHover: "hover:bg-amber-900 hover:text-white",
-    accentText: "text-amber-950",
-    accentMuted: "text-amber-900",
-    accentSurface: "bg-amber-50",
-    activeControl: "border-amber-700 bg-amber-50 text-amber-950",
+    iconBadge: "bg-orange-700 text-white",
+    iconBadgeHover: "hover:bg-yellow-900 hover:text-white",
+    accentText: "text-orange-950",
+    accentMuted: "text-orange-900",
+    accentSurface: "bg-orange-50",
+    activeControl: "border-orange-700 bg-orange-50 text-orange-950",
     inactiveControl: "",
-    callout: "text-sm text-amber-950",
+    callout: "text-sm text-orange-950",
   },
   "ai-ml-libraries": {
     slug: "ai-ml-libraries",
@@ -110,6 +111,23 @@ const themes: Record<ConceptSlug, ConceptTheme> = {
     activeControl: "border-rose-700 bg-rose-50 text-rose-950 shadow-sm",
     inactiveControl: "hover:border-rose-200 hover:bg-rose-50/70",
     callout: "text-sm text-rose-950",
+  },
+  "metadata-linked-data": {
+    slug: "metadata-linked-data",
+    layout: "stages",
+    card: "border-lime-900/10 bg-lime-50/35",
+    shell: "shadow-sm",
+    header: "",
+    contentGap: "space-y-5",
+    detailPanel: "rounded-xl border bg-white p-5",
+    iconBadge: "bg-lime-700 text-white",
+    iconBadgeHover: "hover:bg-lime-900 hover:text-white",
+    accentText: "text-lime-950",
+    accentMuted: "text-lime-900",
+    accentSurface: "bg-lime-50",
+    activeControl: "border-lime-700 bg-lime-50 text-lime-950 shadow-sm",
+    inactiveControl: "hover:border-lime-200 hover:bg-lime-50/70",
+    callout: "text-sm text-lime-950",
   },
 }
 
