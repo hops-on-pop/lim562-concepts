@@ -1,8 +1,7 @@
-import { ArrowRight, Layers3 } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 import { ConceptIcon } from "@/components/concept-icon"
-import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getConceptTheme } from "@/lib/concept-themes"
@@ -12,15 +11,15 @@ import { cn } from "@/lib/utils"
 export default function Home() {
   return (
     <main className="page-shell page-shell-dashboard">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-6 sm:px-8 lg:px-10">
-        <header className="border-b pb-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-5 py-6 sm:px-8 lg:px-10">
+        <header className="border-b pb-4">
           <div className="w-full">
             <h1 className="text-3xl font-semibold tracking-normal text-balance sm:text-4xl lg:text-5xl">
               LIM562: Transformative Technologies in LIS
             </h1>
             <p className="mt-4 text-base leading-7 text-muted-foreground sm:text-lg">
               Interactive concept topics for reviewing how library technology
-              systems are planned, built, evaluated, hosted, and governed.
+              systems are planned, built, hosted, and operated.
             </p>
           </div>
         </header>
@@ -43,7 +42,7 @@ export default function Home() {
 
               return (
                 <Card
-                  className="group bg-white/90 transition-colors hover:border-primary/30"
+                  className="group shadow-lg bg-white/90 transition-colors hover:border-primary/30"
                   key={concept.slug}
                 >
                   <CardHeader>
