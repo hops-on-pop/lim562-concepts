@@ -464,7 +464,7 @@
     "application": "Conversational Discovery",
     "primaryArea": "Discovery",
     "audience": "Patron",
-    "aiType": "Generative AI",
+    "aiType": "Natural Language Processing",
     "technologyTags": ["LLM", "RAG", "Semantic Search"],
     "maturity": "Emerging",
     "keyConcerns": ["Accuracy", "Transparency"],

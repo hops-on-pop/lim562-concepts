@@ -25,7 +25,7 @@ type Ownership = "open" | "proprietary"
 
 type TradeoffLevel = "high" | "medium" | "low"
 
-type TradeoffDimensionId = "control" | "effort" | "vendor" | "upfront"
+type TradeoffDimensionId = "control" | "effort" | "vendor"
 
 type StackLayerId = "data" | "app" | "runtime" | "os" | "infra"
 
@@ -112,23 +112,18 @@ const tradeoffDimensions: {
   { id: "control", label: "Control & customization", higherIsBetter: true },
   { id: "effort", label: "Staff technical effort", higherIsBetter: false },
   { id: "vendor", label: "Vendor dependence", higherIsBetter: false },
-  {
-    id: "upfront",
-    label: "Up-front and license cost",
-    higherIsBetter: false,
-  },
 ]
 
 const ownershipOptions: Record<Ownership, { label: string; detail: string }> = {
   open: {
     label: "Open source",
     detail:
-      "The library can inspect, modify, and move the software, even when another organization hosts it.",
+      "The library controls the code and features, and can modify the software regardless of where it is hosted.",
   },
   proprietary: {
     label: "Proprietary",
     detail:
-      "The vendor controls the code, roadmap, licensing, and support model while the library configures what the product exposes.",
+      "The vendor controls the code, roadmap, licensing, and support model while the library configures settings and some customizations.",
   },
 }
 
@@ -161,7 +156,7 @@ const platformCombinations: PlatformCombination[] = [
       "Upgrades, security patches, and recovery planning are local responsibilities",
       "Hardware replacement and capacity planning stay with the library",
     ],
-    levels: { control: "high", effort: "high", vendor: "low", upfront: "high" },
+    levels: { control: "high", effort: "high", vendor: "low" },
   },
   {
     ownership: "open",
@@ -187,7 +182,6 @@ const platformCombinations: PlatformCombination[] = [
       control: "high",
       effort: "high",
       vendor: "medium",
-      upfront: "low",
     },
   },
   {
@@ -214,7 +208,6 @@ const platformCombinations: PlatformCombination[] = [
       control: "medium",
       effort: "medium",
       vendor: "medium",
-      upfront: "low",
     },
   },
   {
@@ -242,7 +235,6 @@ const platformCombinations: PlatformCombination[] = [
       control: "medium",
       effort: "low",
       vendor: "medium",
-      upfront: "low",
     },
   },
   {
@@ -269,7 +261,6 @@ const platformCombinations: PlatformCombination[] = [
       control: "medium",
       effort: "high",
       vendor: "medium",
-      upfront: "high",
     },
   },
   {
@@ -297,7 +288,6 @@ const platformCombinations: PlatformCombination[] = [
       control: "medium",
       effort: "medium",
       vendor: "high",
-      upfront: "low",
     },
   },
   {
@@ -317,10 +307,10 @@ const platformCombinations: PlatformCombination[] = [
     ],
     watch: [
       "Customization is limited to supported settings and integrations",
-      "Exit planning depends on data export and contract terms",
+      "Vendor lock-in, contract terms may limit exit options",
       "Subscription, renewal, and add-on costs need careful review",
     ],
-    levels: { control: "low", effort: "low", vendor: "high", upfront: "low" },
+    levels: { control: "low", effort: "low", vendor: "high" },
   },
 ]
 

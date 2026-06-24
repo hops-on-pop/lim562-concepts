@@ -82,7 +82,7 @@ export const concepts: Concept[] = [
     summary:
       "Explore ten library-facing AI and machine learning applications — what each looks like in practice, where the field already uses it, and the risks and review practices it requires.",
     definition:
-      "AI and machine learning in libraries span trained models, retrieval and ranking systems, and generative tools that produce or transform content — applied to patron service, collections work, and daily operations.",
+      "AI and machine learning in libraries encompass a range of approaches, including predictive models, natural language processing, retrieval and ranking algorithms, and generative tools for content creation or transformation. These technologies always require a balance of technical innovation with ethical, transparent, and mission-aligned practices.",
     example:
       "A library might test ML-assisted subject headings, deploy discovery search that ranks with learned models, or pilot a chatbot that drafts research starting points — each needing staff review for accuracy, privacy, and bias.",
     whyItMatters:
@@ -96,11 +96,11 @@ export const concepts: Concept[] = [
     summary:
       "See how one library resource can be described as metadata, expressed in Dublin Core, encoded in MARC, modeled in BIBFRAME, and connected as linked data.",
     definition:
-      "Metadata is structured description. Dublin Core offers simple cross-domain elements, MARC packages description in catalog records, and BIBFRAME and linked data model resources, people, subjects, and copies as identifiable things with relationships.",
+      "Library metadata standards and approaches include simple element sets like Dublin Core for general description, highly-structured formats like MARC for detailed catalog records, and newer models like BIBFRAME that represent resources as linked data graphs. Each type prioritizes different goals: some focus on interoperability, others on legacy compatibility or semantic richness.",
     example:
       "A catalog record for a community history book can be summarized with Dublin Core elements, read as fields in MARC, separated into Work, Instance, Item, Agent, and Subject entities in BIBFRAME, then connected to authority identifiers on the web.",
     whyItMatters:
-      "These models shape what catalogs can connect, reuse, explain, and share beyond a single local record.",
+      "These models shape how catalogs can connect, reuse, explain, and share beyond a single local record.",
   },
 ]
 
